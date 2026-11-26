@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+/* 디자인 토큰: design/mocks/g-showcase.html (시안 G) 기준. 라이트 모드 전용. */
+@theme {
+  --font-sans: var(--font-pretendard), -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Malgun Gothic", system-ui, sans-serif;
+
+  /* 브랜드: 로고, 선택된 탭, 주요 버튼에만 쓴다 */
+  --color-brand: #d6336c;
+  --color-brand-ink: #b8285a;
+  --color-brand-tint: #fdeef3;
+
+  /* 글자 */
+  --color-ink: #191f28;
+  --color-ink-2: #4e5968;
+  --color-ink-3: #6b7684;
+  --color-ink-4: #b0b8c1; /* 흰 바탕 대비 약 2:1. 장식선·비활성 아이콘 전용, 글자에 쓰지 않는다 */
+
+  /* 면과 선 */
+  --color-fill: #f2f4f6;
+  --color-fill-2: #f9fafb;
+  --color-line: #e5e8eb;
+
+  /* 금액 판단: 높음은 빨강, 낮음은 파랑 */
+  --color-up: #d63a2f;
+  --color-up-ink: #c42f25;
+  --color-up-tint: #feedeb;
+  --color-down: #2563d9;
+  --color-down-ink: #2361d4;
+  --color-down-tint: #eaf1fd;
+  --color-warn: #9a5800;
+  --color-warn-tint: #fff4e0;
+
+  --radius-card: 20px;
+  --radius-photo: 14px;
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "tnum" 0;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}

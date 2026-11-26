@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2E4339">
+<title>내 견적 비교 — 시안 F</title>
+<!-- 시안 F: "청첩장 × 둘의 투어 다이어리".
+     천 표지(병록색) 다이어리 한 권. 첫 장은 활판 청첩장 표지, 그 뒤로 종이 한 장 = 한 섹션.
+     오른쪽 가장자리의 종이 색인 탭이 내비게이션. 웨딩홀은 마스킹테이프로 붙인 폴라로이드,
+     누르면 뒤집혀 뒷면에 견적 메모(숫자는 인쇄체). 소품은 실링 왁스 하나만.
+     글꼴: 송명(제목, 활판), 고운돋움(본문), 나눔손글씨 펜(민지), 개구(준호), Spectral(숫자, tabular).
+     사진 출처 (모두 Unsplash, Unsplash License) — 시안 D와 같은 사진:
+     - 라온홀:       https://unsplash.com/photos/7K67WDBrcIs  (images.unsplash.com/photo-1761110787206-2cc164e4913c)
+     - 채플 드 메이: https://unsplash.com/photos/aRQrz0fclB8  (images.unsplash.com/photo-1670529776180-60e4132ab90c)
+     - 가든 루체:    https://unsplash.com/photos/xMDo8y776uE  (images.unsplash.com/photo-1607861884586-c7cfaed16290)
+     - 더 리안:      https://unsplash.com/photos/m_CaYs0abOE  (images.unsplash.com/photo-1763429338698-439aa108e7fb)
+     - 포레 웨딩:    https://unsplash.com/photos/K8KiCHh4WU4  (images.unsplash.com/photo-1523438885200-e635ba2c371e)
+     홀 이름은 모두 가상입니다. 실서비스에서는 커플이 찍은 투어 사진 또는 업체가 직접 등록·허락한 사진만 씁니다. -->
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Song+Myung&family=Gowun+Dodum&family=Nanum+Pen+Script&family=Gaegu:wght@400;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+:root{
+  --cover:#2E4339;      /* 병록색 천 표지 = 책상 위 다이어리 */
+  --paper:#F4F2EA;      /* 코튼지 */
+  --paper-2:#ECE9DE;    /* 한 장 아래 종이 */
+  --ink:#1F2622;        /* 활판 먹 (녹빛 검정) 14:1 */
+  --ink-2:#4B534D;      /* 보조 7.4:1 */
+  --ink-3:#5F665F;      /* 캡션 5.6:1 */
+  --rule:#D6D2C4;
+  --wax:#8A2433;        /* 실링 왁스, 높음·위험 6.9:1 */
+  --leaf:#2D5B45;       /* 낮음·유리 6.6:1 */
+  --minji:#24478A;      /* 민지: 만년필 파랑 */
+  --junho:#5B3B1A;      /* 준호: 세피아 */
+  --back:#23282A;       /* 폴라로이드 뒷면 */
+  --title:"Song Myung","Nanum Myeongjo",serif;
+  --body:"Gowun Dodum","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --num:"Spectral","Gowun Dodum",serif;
+  --pen-m:"Nanum Pen Script",cursive;
+  --pen-j:"Gaegu",cursive;
+  --ease-out:cubic-bezier(0.23,1,0.32,1);
+  --ease-io:cubic-bezier(0.77,0,0.175,1);
+  --noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .32 0 0 0 0 .24 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --fiber:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .18' numOctaves='2' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .38 0 0 0 0 .3 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--body);color:var(--ink);font-size:15px;line-height:1.65;word-break:keep-all;
+  -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:hidden;
+  /* 천 표지 질감 */
+  background:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 3px),
+    repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 1px,transparent 1px 3px),
+    var(--cover)}
+.n{font-family:var(--num);font-variant-numeric:lining-nums tabular-nums;letter-spacing:0}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:inherit}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--minji);outline-offset:3px;border-radius:3px}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* 다이어리: 왼쪽은 묶인 쪽(좁은 여백), 오른쪽은 색인 탭이 튀어나오는 자리 */
+.diary{max-width:430px;margin:0 auto;padding:14px 40px calc(40px + env(safe-area-inset-bottom)) 10px;position:relative}
+
+/* 종이 한 장 */
+.sheet{position:relative;background:var(--fiber),var(--noise),var(--paper);border-radius:2px 6px 6px 2px;padding:30px 20px 18px 24px;
+  box-shadow:
+    inset 14px 0 14px -14px rgba(31,38,34,.28),          /* 묶인 쪽 그늘 */
+    0 1px 0 rgba(0,0,0,.04),
+    2px 3px 0 -1px var(--paper-2),2px 3px 0 0 rgba(0,0,0,.08),  /* 아래 겹친 종이 가장자리 */
+    4px 6px 0 -2px #E3DFD2,4px 6px 0 -1px rgba(0,0,0,.07),
+    0 18px 30px -18px rgba(0,0,0,.55)}
+.sheet + .sheet{margin-top:22px}
+.folio{display:block;text-align:center;margin-top:22px;font-family:var(--num);font-style:italic;font-size:13px;color:var(--ink-3)}
+
+/* 활판: 살짝 눌린 글자 */
+.press{color:#2A312C;text-shadow:0 1px 0 rgba(255,255,255,.85),0 -.5px 0 rgba(0,0,0,.18)}
+.sheet-h{font-family:var(--title);font-weight:400;font-size:24px;line-height:1.3;text-align:center;text-wrap:balance}
+.orn{display:block;margin:10px auto 18px;width:120px;height:9px;color:#9A957F}
+
+/* ── 1. 표지 (청첩장) ── */
+.cover{text-align:center;padding:26px 18px 0}
+.frame{border:1px solid #BDB7A3;outline:1px solid #BDB7A3;outline-offset:-6px;padding:34px 12px 30px;
+  box-shadow:inset 0 1px 1px rgba(0,0,0,.06),0 1px 0 rgba(255,255,255,.8)}
+.names{font-family:var(--title);font-weight:400;font-size:40px;line-height:1.2;letter-spacing:.02em}
+.names small{display:block;font-family:var(--body);font-size:13px;letter-spacing:.3em;color:var(--ink-3);margin:8px 0 10px;text-shadow:none}
+.when{margin-top:22px;font-size:17px;color:var(--ink)}
+.when .n{font-size:18px}
+.where{font-size:14px;color:var(--ink-2);margin-top:2px}
+.dday{display:inline-block;margin-top:18px;font-family:var(--num);font-size:15px;font-weight:500;color:var(--ink-2);
+  padding:2px 14px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+/* 접는 선 + 실링 왁스 (소품은 이것 하나) */
+.fold{position:relative;height:56px;margin:22px -18px 0}
+.fold::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:1px dashed #C4BEAC}
+.seal{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;display:grid;place-items:center;
+  border-radius:47% 53% 50% 50% / 52% 46% 54% 48%;color:#E9C7C4;font-family:var(--title);font-size:20px;
+  background:radial-gradient(circle at 38% 32%,#B23A4B 0,#8A2433 45%,#641824 100%);
+  box-shadow:0 0 0 4px rgba(138,36,51,.9),0 2px 0 4px rgba(84,18,28,.6),0 6px 10px rgba(0,0,0,.25),inset 0 0 0 7px rgba(100,24,36,.55),inset 0 0 0 8px rgba(255,200,200,.12);
+  text-shadow:0 -1px 0 rgba(0,0,0,.35),0 1px 0 rgba(255,255,255,.18)}
+.verdict{text-align:left;padding:18px 2px 0}
+.verdict .lead{font-family:var(--title);font-size:23px;line-height:1.45;text-wrap:balance}
+.verdict .sub{margin-top:8px;font-size:14px;color:var(--ink-2)}
+.risk{margin-top:18px;padding:14px 0 2px;border-top:1px solid var(--rule)}
+.risk p{font-size:15px;line-height:1.6;text-wrap:pretty}
+.risk p .n{color:var(--wax);font-weight:600;font-size:17px}
+.risk a{display:inline-flex;align-items:center;gap:6px;min-height:44px;font-size:14px;color:var(--wax);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+
+/* ── 2. 투어 다이어리 ── */
+.today{display:block;text-align:center;font-size:13px;color:var(--ink-3);margin:-8px 0 14px}
+.entry{display:grid;grid-template-columns:172px 1fr;gap:14px;align-items:start;padding:18px 0 22px}
+.entry:nth-of-type(even){grid-template-columns:1fr 172px}
+.entry:nth-of-type(even) .pol{order:2}
+.entry + .entry{border-top:1px dashed #D3CEBE}
+
+.pol{position:relative;perspective:1000px;rotate:var(--tilt);margin-top:6px}
+.tape{position:absolute;z-index:3;left:50%;top:-11px;width:76px;height:22px;margin-left:-38px;rotate:var(--tape);pointer-events:none;
+  background:linear-gradient(90deg,rgba(255,255,255,.25),rgba(255,255,255,0) 40%),var(--tape-c,rgba(206,214,192,.78));
+  clip-path:polygon(0 8%,4% 0,9% 10%,14% 0,100% 0,96% 12%,100% 25%,97% 40%,100% 58%,96% 76%,100% 100%,6% 100%,0 88%,3% 70%,0 50%,4% 30%);
+  box-shadow:0 1px 1px rgba(0,0,0,.05)}
+.flip-btn{display:block;width:100%;border-radius:2px;transition:scale 140ms var(--ease-out)}
+.flip-btn:active{scale:.98}
+.flip{position:relative;display:grid;transform-style:preserve-3d;transition:transform 560ms var(--ease-io)}
+.pol.is-back .flip{transform:rotateY(180deg)}
+.face{grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:2px}
+.front{background:#FBFAF6;padding:9px 9px 0;
+  box-shadow:0 0 0 1px rgba(0,0,0,.05),0 1px 2px rgba(0,0,0,.08),0 10px 18px -10px rgba(0,0,0,.35)}
+.photo{position:relative;aspect-ratio:1;background:#CFCABB;overflow:hidden}
+.photo::after{content:"";position:absolute;inset:0;outline:1px solid oklch(0 0 0 / .1);outline-offset:-1px;
+  background:linear-gradient(160deg,rgba(255,240,220,.08),rgba(0,0,0,.06))}
+.front .cap{display:flex;align-items:center;justify-content:space-between;gap:4px;height:46px;padding:0 2px 0 4px}
+.front .cap b{font-family:var(--pen-m);font-weight:400;font-size:25px;line-height:1;color:var(--minji)}
+.turn{flex:none;width:20px;height:20px;color:#8D8875}
+.back{transform:rotateY(180deg);background:var(--back);color:#E8E5DC;padding:12px 11px 10px;text-align:left;
+  box-shadow:0 0 0 1px rgba(0,0,0,.2),0 10px 18px -10px rgba(0,0,0,.45);display:flex;flex-direction:column}
+.back h4{font-family:var(--body);font-weight:400;font-size:12px;color:#B9B5A9;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.16);
+  display:flex;justify-content:space-between}
+.back dl{flex:1;display:flex;flex-direction:column;justify-content:space-around}
+.back .r{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+.back dt{font-size:12px;color:#C2BEB2;white-space:nowrap}
+.back dd{font-family:var(--num);font-variant-numeric:lining-nums tabular-nums;font-size:14px;font-weight:500;color:#FBFAF6;white-space:nowrap}
+.back .r.tot{border-top:1px solid rgba(255,255,255,.16);padding-top:5px}
+.back .r.tot dd{font-size:15px;font-weight:600}
+.back .up{color:#F0A9AF} .back .down{color:#A9D6BC}
+.back .warn{font-size:11.5px;line-height:1.35;color:#F0A9AF;margin-top:4px}
+
+.notes{padding-top:2px;min-width:0}
+.notes .when-t{font-size:12.5px;color:var(--ink-3);margin-bottom:6px}
+.note{line-height:1.15;margin-bottom:10px}
+.note .who{display:block;font-family:var(--body);font-size:11.5px;color:var(--ink-3);margin-bottom:1px}
+.note q{quotes:none;display:block;text-wrap:pretty}
+.note.m q{font-family:var(--pen-m);font-size:23px;color:var(--minji);rotate:-1deg}
+.note.j q{font-family:var(--pen-j);font-size:17px;font-weight:700;color:var(--junho);line-height:1.3}
+.stars{font-family:var(--num);font-size:13px;letter-spacing:1px;display:block;margin-top:2px}
+.note.m .stars{color:var(--minji)} .note.j .stars{color:var(--junho)}
+.stars i{font-style:normal;opacity:.28}
+/* 비교에 넣기: 연필로 그린 네모 */
+.pick{display:flex;align-items:center;gap:8px;min-height:44px;font-size:13.5px;color:var(--ink-2);cursor:pointer;position:relative}
+.pick input{position:absolute;opacity:0;width:44px;height:44px;left:-10px;margin:0;cursor:pointer}
+.pick .box{width:20px;height:20px;flex:none;border:1.5px solid #6E7369;border-radius:3px 2px 4px 2px;display:grid;place-items:center;color:transparent;
+  transition:color 160ms var(--ease-out),background-color 160ms var(--ease-out)}
+.pick input:checked + .box{color:var(--ink)}
+.pick input:focus-visible + .box{outline:2px solid var(--minji);outline-offset:3px}
+.pick input:disabled ~ *{opacity:.5}
+.full{font-size:13px;color:var(--ink-3);text-align:center;padding-top:6px;text-wrap:pretty}
+
+/* ── 3. 다섯 곳 비교: 청첩장 속지 인쇄 표 ── */
+.basis{text-align:center;font-size:13.5px;color:var(--ink-2);margin:-6px 0 16px;text-wrap:balance}
+.rank{list-style:none}
+.rank li{padding:9px 0}
+.rank .line{display:flex;align-items:baseline;gap:8px}
+.rank .no{font-family:var(--num);font-style:italic;font-size:15px;width:14px;color:var(--ink-3)}
+.rank .nm{font-family:var(--title);font-size:18px;white-space:nowrap}
+.rank .dots{flex:1;min-width:12px;border-bottom:1.5px dotted #A9A390;translate:0 -5px}
+.rank .amt{font-size:17px;font-weight:500}
+.rank .gap{display:block;text-align:right;font-size:12.5px;color:var(--ink-3)}
+.rank li:first-child .gap{color:var(--leaf)}
+.rank li.risky .nm,.rank li.risky .amt{color:var(--wax)}
+.more{display:block;text-align:center;font-size:13px;color:var(--ink-3);margin:18px 0 8px}
+.tbl-wrap{margin:0 -20px 0 -24px;overflow-x:auto;scrollbar-width:thin;scrollbar-color:#BDB7A3 transparent;overscroll-behavior-x:contain;
+  border-top:1px solid #BDB7A3;border-bottom:1px solid #BDB7A3;box-shadow:inset 0 3px 0 -2px #BDB7A3,inset 0 -3px 0 -2px #BDB7A3}
+.cmp{border-collapse:collapse;font-size:14px}
+.cmp th,.cmp td{padding:10px 12px;text-align:right;vertical-align:baseline;white-space:nowrap}
+.cmp tbody tr + tr > *{border-top:1px solid var(--rule)}
+.cmp thead th{font-family:var(--title);font-weight:400;font-size:16px;padding-top:14px;border-bottom:1px solid #BDB7A3}
+.cmp th[scope=row],.cmp thead th:first-child{position:sticky;left:0;z-index:1;text-align:left;padding-left:24px;min-width:104px;
+  font-family:var(--body);font-size:13px;font-weight:400;color:var(--ink-2);background:var(--fiber),var(--noise),var(--paper);box-shadow:8px 0 8px -8px rgba(0,0,0,.18)}
+.cmp td .s{display:block;font-family:var(--body);font-size:12px;color:var(--ink-3)}
+.cmp td:last-child{padding-right:20px}
+.cmp .best{color:var(--leaf);font-weight:600}
+.cmp .up{color:var(--wax)} .cmp .down{color:var(--leaf)}
+.fine{font-size:12.5px;line-height:1.6;color:var(--ink-3);margin-top:12px;text-wrap:pretty}
+
+/* ── 4. 스드메 명세서 ── */
+.bill{margin-top:4px}
+.item{padding:12px 0;border-bottom:1px solid var(--rule)}
+.item .line{display:flex;align-items:baseline;gap:8px}
+.item .k{font-size:16px;white-space:nowrap}
+.item .dots{flex:1;min-width:12px;border-bottom:1.5px dotted #A9A390;translate:0 -5px}
+.item .v{font-size:18px;font-weight:500}
+.item .med{display:flex;justify-content:space-between;margin-top:2px;font-size:13px;color:var(--ink-3)}
+.item .med .up{color:var(--wax)} .item .med .same{color:var(--ink-2)}
+.sum{display:flex;align-items:baseline;gap:8px;padding:12px 0 4px;border-bottom:3px double #A9A390}
+.sum .k{font-size:15px;color:var(--ink-2)}
+.sum .v{margin-left:auto;font-size:19px;font-weight:600}
+.sub-h{font-family:var(--title);font-size:19px;font-weight:400;margin:28px 0 2px;text-align:center}
+.sub-p{text-align:center;font-size:13.5px;color:var(--ink-2);margin-bottom:6px;text-wrap:balance}
+.fee{display:flex;align-items:center;gap:10px;min-height:52px;border-bottom:1px solid var(--rule)}
+.fee .tick{width:18px;height:18px;flex:none;border:1.5px dashed #8D8875;border-radius:2px}
+.fee .k{flex:1;font-size:15px}
+.fee .v{font-size:15px;color:var(--ink-2)}
+.fee .st{font-size:12.5px;color:var(--ink-3);width:44px;text-align:right}
+.ceiling{margin:20px 0 0;padding:16px 0 4px;text-align:center;border-top:3px double #A9A390}
+.ceiling p{font-size:14px;color:var(--ink-2)}
+.ceiling .big{font-size:30px;font-weight:600;color:var(--ink);line-height:1.3;margin:2px 0}
+.ceiling .eq{font-size:13px;color:var(--ink-3)}
+.source{margin-top:22px;padding-top:12px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--ink-3);text-align:center;text-wrap:balance}
+
+/* ── 색인 탭: 오른쪽 가장자리, 엄지 닿는 아래쪽 ── */
+.index{position:fixed;z-index:20;right:max(0px,calc(50vw - 215px));bottom:calc(28px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:4px;pointer-events:none}
+.index a{pointer-events:auto;display:flex;align-items:center;justify-content:center;width:38px;min-height:62px;padding:8px 0 8px 3px;
+  writing-mode:vertical-rl;font-size:14px;letter-spacing:.18em;text-decoration:none;color:var(--ink);
+  border-radius:0 7px 7px 0;background:var(--noise),var(--t,#C9D2C3);
+  box-shadow:inset 3px 0 4px -3px rgba(0,0,0,.35),1px 2px 3px rgba(0,0,0,.25);transition:translate 160ms var(--ease-out)}
+.index a:nth-child(2){--t:#D9CDB6} .index a:nth-child(3){--t:#C6CDD4} .index a:nth-child(4){--t:#DCC9C4}
+.index a[aria-current=page]{--t:var(--paper);width:42px;font-weight:700;box-shadow:inset 2px 0 0 var(--paper),2px 2px 4px rgba(0,0,0,.3)}
+.index a:active{translate:3px 0}
+
+@media (min-width:600px){ body{padding:24px 0} }
+@media (prefers-reduced-motion:reduce){
+  /* 뒤집지 않고 앞뒷면을 크로스페이드 */
+  .flip,.pol.is-back .flip{transform:none;transition:none}
+  .back{transform:none}
+  .face{transition:opacity 220ms ease}
+  .back{opacity:0} .pol.is-back .back{opacity:1} .pol.is-back .front{opacity:0}
+  .flip-btn,.index a{transition:none}
+}
+</style>
+</head>
+<body>
+<div class="diary" id="top">
+
+  <!-- 1. 표지: 청첩장 -->
+  <section class="sheet cover" aria-labelledby="names">
+    <div class="frame">
+      <h1 class="names press" id="names">민지<small>그리고</small>준호</h1>
+      <p class="when"><span class="n">2027. 4. 10.</span> 토요일</p>
+      <p class="where">서울 강남</p>
+      <p class="dday n" aria-label="예식까지 127일">D-127</p>
+    </div>
+    <div class="fold" aria-hidden="true"><span class="seal">囍</span></div>
+    <div class="verdict">
+      <h2 class="lead press">스드메 견적이 강남 평균보다 약&nbsp;<span class="n">54</span>만&nbsp;원 높아요</h2>
+      <p class="sub">내 합계 <span class="n">4,850,000</span>원, 서울 강남 중간값 <span class="n">4,310,000</span>원</p>
+      <div class="risk">
+        <p>가장 큰 위험은 라온홀이에요. 보증 인원 때문에 <span class="n">4,750,000</span>원을 더 낼 수 있어요.</p>
+        <a href="#hall-0">라온홀 견적 메모 보기</a>
+      </div>
+    </div>
+    <span class="folio">1</span>
+  </section>
+
+  <!-- 2. 투어 다이어리 -->
+  <section class="sheet" aria-labelledby="tour-h">
+    <h2 class="sheet-h press" id="tour-h">둘의 투어 다이어리</h2>
+    <svg class="orn" viewBox="0 0 120 9" aria-hidden="true"><path d="M0 4.5h50M70 4.5h50" stroke="currentColor"/><path d="M60 .5l4 4-4 4-4-4z" fill="currentColor"/></svg>
+    <p class="today">사진을 누르면 뒷면에 견적 메모가 있어요</p>
+    <div id="entries"></div>
+    <p class="full" id="full"></p>
+    <span class="folio">2</span>
+  </section>
+
+  <!-- 3. 홀끼리 비교 -->
+  <section class="sheet" id="compare" aria-labelledby="cmp-h">
+    <h2 class="sheet-h press" id="cmp-h">웨딩홀 견적 비교</h2>
+    <svg class="orn" viewBox="0 0 120 9" aria-hidden="true"><path d="M0 4.5h50M70 4.5h50" stroke="currentColor"/><path d="M60 .5l4 4-4 4-4-4z" fill="currentColor"/></svg>
+    <p class="basis">하객 <span class="n">200</span>명 기준 총비용이 낮은 순서예요</p>
+    <ol class="rank" id="rank"></ol>
+    <span class="more">항목별 자세히, 옆으로 넘겨 보기</span>
+    <div class="tbl-wrap" role="region" aria-label="홀별 항목 비교표, 옆으로 넘겨 보기" tabindex="0"><table class="cmp" id="cmp"></table></div>
+    <p class="fine">총비용은 식대 × 보증 인원과 하객 <span class="n">200</span>명 중 큰 수 + 대관료예요. 강남 중간값 대비는 식대 <span class="n">88,000</span>원, 대관료 <span class="n">7,500,000</span>원으로 계산한 <span class="n">25,100,000</span>원과 비교했어요.</p>
+    <span class="folio">3</span>
+  </section>
+
+  <!-- 4. 스드메 견적 명세서 -->
+  <section class="sheet" aria-labelledby="sdm-h">
+    <h2 class="sheet-h press" id="sdm-h">스드메 견적 명세서</h2>
+    <svg class="orn" viewBox="0 0 120 9" aria-hidden="true"><path d="M0 4.5h50M70 4.5h50" stroke="currentColor"/><path d="M60 .5l4 4-4 4-4-4z" fill="currentColor"/></svg>
+    <div class="bill">
+      <div class="item"><div class="line"><span class="k">스튜디오</span><span class="dots"></span><span class="v n">1,800,000</span></div>
+        <div class="med"><span>강남 중간값 <span class="n">1,530,000</span></span><span class="up n">+18%</span></div></div>
+      <div class="item"><div class="line"><span class="k">드레스</span><span class="dots"></span><span class="v n">2,100,000</span></div>
+        <div class="med"><span>강남 중간값 <span class="n">1,780,000</span></span><span class="up n">+18%</span></div></div>
+      <div class="item"><div class="line"><span class="k">메이크업</span><span class="dots"></span><span class="v n">950,000</span></div>
+        <div class="med"><span>강남 중간값 <span class="n">1,000,000</span></span><span class="same">비슷함</span></div></div>
+      <div class="sum"><span class="k">합계</span><span class="v n">4,850,000원</span></div>
+    </div>
+
+    <h3 class="sub-h press">숨은 추가금</h3>
+    <p class="sub-p">견적에 들어 있는지 아직 확인하지 않았어요</p>
+    <div class="fee"><span class="tick" aria-hidden="true"></span><span class="k">스튜디오 원본 데이터</span><span class="v">약 <span class="n">22</span>만</span><span class="st">확인 전</span></div>
+    <div class="fee"><span class="tick" aria-hidden="true"></span><span class="k">드레스 헬퍼비</span><span class="v">약 <span class="n">25</span>만</span><span class="st">확인 전</span></div>
+    <div class="fee"><span class="tick" aria-hidden="true"></span><span class="k">메이크업 얼리스타트</span><span class="v">약 <span class="n">10</span>만</span><span class="st">확인 전</span></div>
+    <div class="ceiling">
+      <p>추가금까지 넣으면 최대</p>
+      <p class="big n">5,420,000원</p>
+      <p class="eq">스드메 견적 <span class="n">4,850,000</span>원 + 추가금 <span class="n">570,000</span>원</p>
+    </div>
+    <p class="source">한국소비자원 참가격 <span class="n">2026</span>년 <span class="n">9</span>월 조사, 지역 중간값 기준이에요. 참고용으로 봐 주세요.</p>
+    <span class="folio">4</span>
+  </section>
+</div>
+
+<nav class="index" aria-label="다이어리 색인">
+  <a href="#top" aria-current="page">견적</a>
+  <a href="#">일정</a>
+  <a href="#">비용</a>
+  <a href="#">청첩장</a>
+</nav>
+
+<script>
+const MEAL = 88000, RENT = 7500000, GUESTS = 200, MAX = 5, MED_TOTAL = MEAL * GUESTS + RENT;
+const U = (id, w) => `https://images.unsplash.com/${id}?w=${w}&h=${w}&q=80&auto=format&fit=crop`;
+const HALLS = [
+  {name:'라온홀',       img:'photo-1761110787206-2cc164e4913c', alt:'샹들리에 아래 원형 테이블이 놓인 연회장',          date:'11월 8일',  meal:95000, rent:7000000, min:250, mj:4, jh:5, m:'샹들리에 진짜 예뻤어', j:'주차 불편… 그래도', tilt:-2.5, tape:-4, tc:'rgba(206,214,192,.8)'},
+  {name:'채플 드 메이', img:'photo-1670529776180-60e4132ab90c', alt:'흰 꽃 아치와 금색 의자가 놓인 예식 통로',          date:'11월 15일', meal:88000, rent:8500000, min:200, mj:5, jh:3, m:'꽃 아치 보자마자 반함', j:'대관료가 좀 세다', tilt:2, tape:3, tc:'rgba(228,214,190,.82)'},
+  {name:'가든 루체',    img:'photo-1607861884586-c7cfaed16290', alt:'흰 의자가 줄지어 있고 조명이 켜진 야외 정원 예식장', date:'11월 22일', meal:79000, rent:5500000, min:220, mj:4, jh:4, m:'비 오면 어떡하지?', j:'저녁 조명 분위기 좋음', tilt:-1.5, tape:2, tc:'rgba(200,210,220,.8)'},
+  {name:'더 리안',      img:'photo-1763429338698-439aa108e7fb', alt:'연회 테이블이 차려진 실내 홀',                    date:'11월 23일', meal:99000, rent:9000000, min:200, mj:3, jh:4, m:'홀이 너무 넓어 보였어', j:'음식은 여기가 제일', tilt:2.5, tape:-3, tc:'rgba(206,214,192,.8)'},
+  {name:'포레 웨딩',    img:'photo-1523438885200-e635ba2c371e', alt:'초록 나무에 둘러싸인 야외 정자',                  date:'11월 29일', meal:85000, rent:6000000, min:180, mj:5, jh:4, m:'나무 그늘 아래 사진!', j:'셔틀버스 꼭 물어보기', tilt:-1, tape:4, tc:'rgba(228,214,190,.82)'},
+];
+HALLS.forEach((h, i) => { h.i = i; h.total = h.meal * Math.max(h.min, GUESTS) + h.rent; h.vs = Math.round((h.total - MED_TOTAL) / MED_TOTAL * 100); });
+const won = n => n.toLocaleString('ko-KR');
+const man = n => Math.round(n / 10000).toLocaleString('ko-KR') + '만';
+const pctTxt = p => `<span class="${p > 0 ? 'up' : 'down'}">${p > 0 ? '+' : '−'}${Math.abs(p)}%</span>`;
+const stars = k => `<span class="stars" aria-label="별 ${k}개">${'★'.repeat(k)}<i>${'★'.repeat(5 - k)}</i></span>`;
+const TURN = '<svg class="turn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg>';
+const TICK = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 13c2 1.5 3.5 3.5 5 6 3-6 6.5-10.5 11-14"/></svg>';
+const picked = new Set(HALLS.map(h => h.i));
+
+document.getElementById('entries').innerHTML = HALLS.map(h => {
+  const short = h.min - GUESTS;
+  return `<article class="entry" id="hall-${h.i}" style="scroll-margin-top:24px">
+    <div class="pol${h.i === 0 ? ' is-back' : ''}" style="--tilt:${h.tilt}deg;--tape:${h.tape}deg;--tape-c:${h.tc}">
+      <span class="tape" aria-hidden="true"></span>
+      <button class="flip-btn" type="button" aria-pressed="${h.i === 0}" aria-label="${h.name} 사진, 눌러서 견적 메모 ${h.i === 0 ? '닫기' : '보기'}">
+        <div class="flip">
+          <div class="face front"${h.i === 0 ? ' aria-hidden="true"' : ''}>
+            <div class="photo"><img src="${U(h.img, 360)}" alt="${h.alt}" width="154" height="154"${h.i > 1 ? ' loading="lazy"' : ''}></div>
+            <div class="cap"><b>${h.name}</b>${TURN}</div>
+          </div>
+          <div class="face back"${h.i === 0 ? '' : ' aria-hidden="true"'}>
+            <h4><span>${h.name} 견적</span><span class="n">200명</span></h4>
+            <dl>
+              <div class="r"><dt>1인당 식대</dt><dd>${won(h.meal)}</dd></div>
+              <div class="r"><dt>대관료</dt><dd>${won(h.rent)}</dd></div>
+              <div class="r"><dt>보증 인원</dt><dd>${h.min}명</dd></div>
+              <div class="r tot"><dt>총비용</dt><dd>${won(h.total)}</dd></div>
+              <div class="r"><dt>강남 중간값 대비</dt><dd>${pctTxt(h.vs)}</dd></div>
+            </dl>
+            ${short > 0 ? `<p class="warn">하객이 ${short}명 적으면 <span class="n">${won(short * h.meal)}</span>원 더 내요</p>` : ''}
+          </div>
+        </div>
+      </button>
+    </div>
+    <div class="notes">
+      <p class="when-t"><span class="n">${h.date.replace('월 ', '. ').replace('일', '.')}</span> 투어</p>
+      <p class="note m"><span class="who">민지</span><q>${h.m}</q>${stars(h.mj)}</p>
+      <p class="note j"><span class="who">준호</span><q>${h.j}</q>${stars(h.jh)}</p>
+      <label class="pick"><input type="checkbox" checked data-i="${h.i}"><span class="box">${TICK}</span><span>비교에 넣기</span></label>
+    </div>
+  </article>`;
+}).join('');
+
+document.querySelectorAll('.pol').forEach(p => {
+  const b = p.querySelector('.flip-btn'), name = HALLS[+p.closest('.entry').id.slice(5)].name;
+  b.addEventListener('click', () => {
+    const back = p.classList.toggle('is-back');
+    b.setAttribute('aria-pressed', back);
+    b.setAttribute('aria-label', `${name} 사진, 눌러서 견적 메모 ${back ? '닫기' : '보기'}`);
+    p.querySelector('.front').toggleAttribute('aria-hidden', back);
+    p.querySelector('.back').toggleAttribute('aria-hidden', !back);
+  });
+});
+
+function renderCompare(){
+  const list = HALLS.filter(h => picked.has(h.i)).sort((a, b) => a.total - b.total), first = list[0];
+  document.querySelectorAll('.pick input').forEach(x => { x.disabled = !x.checked && list.length >= MAX; });
+  document.getElementById('full').textContent = list.length >= MAX ? `비교는 최대 ${MAX}곳까지예요. 하나를 빼면 새 홀을 넣을 수 있어요.` : `${list.length}곳을 비교하고 있어요.`;
+  document.getElementById('compare').hidden = list.length < 2;
+  if (list.length < 2) return;
+  document.getElementById('rank').innerHTML = list.map((h, k) => `<li class="${h.vs >= 20 ? 'risky' : ''}">
+    <div class="line"><span class="no">${k + 1}</span><span class="nm">${h.name}</span><span class="dots" aria-hidden="true"></span><span class="amt n">${won(h.total)}</span></div>
+    <span class="gap">${k ? `1위보다 <span class="n">+${man(h.total - first.total)}</span> 원` : '가장 낮아요'}</span></li>`).join('');
+  const best = (key, dir) => { const v = list.map(h => h[key]); return dir < 0 ? Math.min(...v) : Math.max(...v); };
+  const rows = [
+    ['1인당 식대', 'meal', h => won(h.meal) + '원'],
+    ['대관료', 'rent', h => won(h.rent) + '원'],
+    ['보증 인원', 'min', h => `${h.min}명<span class="s">${h.min > GUESTS ? (h.min - GUESTS) + '명분 더 냄' : '추가 부담 없음'}</span>`],
+    ['총비용', 'total', h => won(h.total) + '원'],
+    ['강남 중간값 대비', 'vs', h => pctTxt(h.vs)],
+    ['둘의 별점', null, h => `민지 ${h.mj}, 준호 ${h.jh}`],
+  ];
+  document.getElementById('cmp').innerHTML =
+    `<thead><tr><th scope="col">항목</th>${list.map(h => `<th scope="col">${h.name}</th>`).join('')}</tr></thead><tbody>` +
+    rows.map(([label, key, f]) => { const b = key && best(key, -1);
+      return `<tr><th scope="row">${label}</th>${list.map(h => `<td class="n${key && h[key] === b ? ' best' : ''}">${f(h)}</td>`).join('')}</tr>`; }).join('') + '</tbody>';
+}
+document.querySelectorAll('.pick input').forEach(x => x.addEventListener('change', () => { x.checked ? picked.add(+x.dataset.i) : picked.delete(+x.dataset.i); renderCompare(); }));
+renderCompare();
+</script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wedo 홈 — H2 비교 보드</title>
+<!-- H2 비교 보드형: 경쟁 앱에 없는 '홀 총액 비교 + 지역 기준 대비'를 첫 화면 주인공으로. 일정·돈은 위 한 줄 + 오른쪽 레일.
+     홀 이름·금액은 모두 가상. 사진 Unsplash License. -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="dash.css">
+
+<style>
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:4px 0 20px}
+.stats>div{background:var(--fill-2);border-radius:16px;padding:12px 14px}
+.stats .mid{font-size:18px}
+.seg{display:inline-flex;background:var(--fill);border-radius:10px;padding:3px;gap:2px}
+.seg button{height:30px;padding:0 12px;border-radius:8px;font-size:13px;font-weight:600;color:var(--ink-3)}
+.seg button[aria-pressed=true]{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgb(0 0 0/.08)}
+.hl{display:grid;gap:10px;margin-top:14px}
+.hl li{display:grid;grid-template-columns:84px 1fr;gap:12px;align-items:center}
+.hl .photo{width:84px;height:84px;aspect-ratio:auto}
+.meter{position:relative;height:6px;border-radius:99px;background:var(--fill);margin-top:8px}
+.meter i{position:absolute;inset:0 auto 0 0;border-radius:99px}
+.meter s{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink);left:66%}
+.board{display:none}
+.rail{display:grid;gap:12px;margin-top:20px}
+.rail .pc{display:none}
+.page>*{min-width:0}
+.pay li,.todo li{display:flex;align-items:center;gap:12px;min-height:48px}
+@media(min-width:768px){
+  .page{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:24px;align-items:start}
+  .stats{display:none}
+  .hl{display:none}
+  .board{display:grid;grid-template-columns:120px repeat(5,minmax(0,1fr));margin-top:16px;border:1px solid var(--line);border-radius:20px;overflow:hidden}
+  .board>div{padding:12px;border-top:1px solid var(--line);font-size:14px;text-align:right}
+  .board>.k{text-align:left;color:var(--ink-3);font-weight:600;font-size:13px;background:var(--fill-2)}
+  .board>.ph{border-top:0;padding:12px 12px 4px;text-align:left}
+  .board>.ph .photo{margin-bottom:8px}
+  .board>.tot{font-size:18px;font-weight:800}
+  .board>.best{background:var(--brand-t)}
+  .rail{margin-top:0;position:sticky;top:88px}
+  .rail .pc{display:block}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+<symbol id="i-quote" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></symbol>
+<symbol id="i-hall" viewBox="0 0 24 24"><path d="M3 21h18M5 21V10l7-6 7 6v11M9 21v-6h6v6"/></symbol>
+<symbol id="i-wallet" viewBox="0 0 24 24"><path d="M19 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0 0 4h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5"/><path d="M17 14h.01"/></symbol>
+<symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+</svg>
+<header class="top"><div><b>Wedo</b><a href="#" aria-current="page">홈</a><a href="#">견적</a><a href="#">웨딩홀</a><a href="#">비용</a><a href="#">일정</a></div></header>
+<nav class="tabs" aria-label="주요 메뉴">
+<a href="#" aria-current="page"><svg class="ic"><use href="#i-home"/></svg>홈</a>
+<a href="#"><svg class="ic"><use href="#i-quote"/></svg>견적</a>
+<a href="#"><svg class="ic"><use href="#i-hall"/></svg>웨딩홀</a>
+<a href="#"><svg class="ic"><use href="#i-wallet"/></svg>비용</a>
+<a href="#"><svg class="ic"><use href="#i-cal"/></svg>일정</a>
+</nav>
+
+<main>
+  <div class="stats num">
+    <div><p class="label">D-day</p><p class="mid">170</p></div>
+    <div><p class="label">남은 잔금</p><p class="mid">2,180만</p></div>
+    <div><p class="label">다음 결제</p><p class="mid" style="color:var(--up)">D-9</p></div>
+  </div>
+
+  <div class="page">
+    <section>
+      <div class="h" style="flex-wrap:wrap;gap:8px">
+        <h2 style="font-size:20px">후보 홀 <span class="num">5</span>곳</h2>
+        <div class="seg" role="group" aria-label="정렬"><button aria-pressed="true">총액</button><button aria-pressed="false">식대</button><button aria-pressed="false">확인 남음</button></div>
+      </div>
+      <p class="sub">하객 200명 · 서울 강남 외 검은 선이 지역 기준 1,650만</p>
+
+      <!-- 모바일: 세로 목록 + 기준선 막대 -->
+      <ul class="hl num">
+        <li><img class="photo" src="https://images.unsplash.com/photo-1607861884586-c7cfaed16290?w=240&q=70&auto=format&fit=crop" alt=""><div><div class="row" style="gap:8px"><span class="rank first">1</span><b class="ellipsis">가든 루체</b><span class="chip warn right">확인 3</span></div><p class="row" style="gap:8px;margin-top:2px"><span class="mid">1,590만</span><span class="chip down">−3.6%</span></p><div class="meter"><i style="width:64%;background:var(--down)"></i><s></s></div></div></li>
+        <li><img class="photo" src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?w=240&q=70&auto=format&fit=crop" alt=""><div><div class="row" style="gap:8px"><span class="rank">2</span><b class="ellipsis">포레 웨딩</b><span class="chip warn right">확인 4</span></div><p class="row" style="gap:8px;margin-top:2px"><span class="mid">1,740만</span><span class="chip up">+5.5%</span></p><div class="meter"><i style="width:70%;background:var(--up)"></i><s></s></div></div></li>
+        <li><img class="photo" src="https://images.unsplash.com/photo-1761110787206-2cc164e4913c?w=240&q=70&auto=format&fit=crop" alt=""><div><div class="row" style="gap:8px"><span class="rank">3</span><b class="ellipsis">라온홀</b><span class="chip warn right">확인 2</span></div><p class="row" style="gap:8px;margin-top:2px"><span class="mid">1,780만</span><span class="chip up">+7.9%</span></p><div class="meter"><i style="width:72%;background:var(--up)"></i><s></s></div></div></li>
+        <li><img class="photo" src="https://images.unsplash.com/photo-1670529776180-60e4132ab90c?w=240&q=70&auto=format&fit=crop" alt=""><div><div class="row" style="gap:8px"><span class="rank">4</span><b class="ellipsis">채플 드 메이</b><span class="chip mute right">완료</span></div><p class="row" style="gap:8px;margin-top:2px"><span class="mid">2,030만</span><span class="chip up">+23%</span></p><div class="meter"><i style="width:82%;background:var(--up)"></i><s></s></div></div></li>
+        <li><img class="photo" src="https://images.unsplash.com/photo-1763429338698-439aa108e7fb?w=240&q=70&auto=format&fit=crop" alt=""><div><div class="row" style="gap:8px"><span class="rank">5</span><b class="ellipsis">더 리안</b><span class="chip warn right">확인 1</span></div><p class="row" style="gap:8px;margin-top:2px"><span class="mid">2,440만</span><span class="chip up">+48%</span></p><div class="meter"><i style="width:99%;background:var(--up)"></i><s></s></div></div></li>
+      </ul>
+
+      <!-- PC: 홀이 열인 비교표 -->
+      <div class="board num" role="table" aria-label="후보 홀 비교">
+        <div class="k ph" style="background:#fff"></div>
+        <div class="ph best"><img class="photo" src="https://images.unsplash.com/photo-1607861884586-c7cfaed16290?w=360&q=70&auto=format&fit=crop" alt=""><div class="row" style="gap:6px"><span class="rank first">1</span><b>가든 루체</b></div></div>
+        <div class="ph"><img class="photo" src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?w=360&q=70&auto=format&fit=crop" alt=""><div class="row" style="gap:6px"><span class="rank">2</span><b>포레 웨딩</b></div></div>
+        <div class="ph"><img class="photo" src="https://images.unsplash.com/photo-1761110787206-2cc164e4913c?w=360&q=70&auto=format&fit=crop" alt=""><div class="row" style="gap:6px"><span class="rank">3</span><b>라온홀</b></div></div>
+        <div class="ph"><img class="photo" src="https://images.unsplash.com/photo-1670529776180-60e4132ab90c?w=360&q=70&auto=format&fit=crop" alt=""><div class="row" style="gap:6px"><span class="rank">4</span><b>채플 드 메이</b></div></div>
+        <div class="ph"><img class="photo" src="https://images.unsplash.com/photo-1763429338698-439aa108e7fb?w=360&q=70&auto=format&fit=crop" alt=""><div class="row" style="gap:6px"><span class="rank">5</span><b>더 리안</b></div></div>
+        <div class="k">식대 (1인)</div><div class="best">6.2만</div><div>5.9만</div><div>6.8만</div><div>7.5만</div><div>8.9만</div>
+        <div class="k">대관</div><div class="best">200만</div><div>350만</div><div>300만</div><div>450만</div><div>600만</div>
+        <div class="k">필수 추가금</div><div class="best">150만</div><div>210만</div><div>120만</div><div>80만</div><div>60만</div>
+        <div class="k">총액</div><div class="tot best">1,590만</div><div class="tot">1,740만</div><div class="tot">1,780만</div><div class="tot">2,030만</div><div class="tot">2,440만</div>
+        <div class="k">지역 기준</div><div class="best"><span class="chip down">−3.6%</span></div><div><span class="chip up">+5.5%</span></div><div><span class="chip up">+7.9%</span></div><div><span class="chip up">+23%</span></div><div><span class="chip up">+48%</span></div>
+        <div class="k">추가금 확인</div><div class="best"><span class="chip warn">3개 남음</span></div><div><span class="chip warn">4개 남음</span></div><div><span class="chip warn">2개 남음</span></div><div><span class="chip mute">완료</span></div><div><span class="chip warn">1개 남음</span></div>
+      </div>
+    </section>
+
+    <aside class="rail">
+      <section class="card pc">
+        <div class="row" style="align-items:flex-end"><div><p class="label">2027.05.15 토</p><p class="big num">D-170</p></div><div class="couple right"><span style="background:#D6336C">나</span><span style="background:#4E5968">짝</span></div></div>
+        <div class="bar" style="margin-top:12px"><i style="width:43%;background:var(--brand)"></i></div>
+        <p class="sub num" style="margin-top:6px">체크리스트 18 / 42</p>
+      </section>
+      <section class="card line">
+        <div class="h"><h2>다가오는 결제</h2><a href="#">장부 ›</a></div>
+        <ul class="pay num">
+          <li><span class="chip up">D-9</span><p class="grow"><b>스튜디오 잔금</b></p><b>180만</b></li>
+          <li><span class="chip mute">D-24</span><p class="grow"><b>드레스 중도금</b></p><b>150만</b></li>
+          <li><span class="chip mute">D-45</span><p class="grow"><b>예물 잔금</b></p><b>300만</b></li>
+        </ul>
+      </section>
+      <section class="card line">
+        <div class="h"><h2>이번 주 할 일</h2><a href="#">일정 ›</a></div>
+        <ul class="todo">
+          <li><span class="chk"></span><p class="grow"><b>가든 루체 투어</b> <span class="sub">11/29 일</span></p></li>
+          <li><span class="chk"></span><p class="grow"><b>본식 스냅 업체 정하기</b></p></li>
+          <li><span class="chk on"><svg class="ic" style="width:14px;height:14px;stroke-width:3"><use href="#i-check"/></svg></span><p class="grow sub" style="text-decoration:line-through">청첩장 문구 고르기</p></li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+</main>
+</body>
+</html>

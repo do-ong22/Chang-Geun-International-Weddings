@@ -45,3 +45,11 @@ yarn-error.log*
 C:\Users\DONGGEUNKIM\.gemini\tmp\
 
 gemini.md
+
+# Claude Code 코드 리뷰 상태 (개인별)
+.claude/.review-state
+.claude/settings.local.json
+
+# Collected raw data and collector secrets (never commit)
+data/
+.env.collector

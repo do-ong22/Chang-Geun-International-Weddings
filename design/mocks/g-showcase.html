@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ourwed 소개 — 시안 G</title>
+<meta name="theme-color" content="#FFFFFF">
+<!-- 시안 G: 앱스토어에 올라간 서비스의 소개 페이지. 콘셉트보다 기본기(정렬, 간격, 위계, 같은 부품의 반복).
+     대표색 로즈 #D6336C: ui-ux-pro-max 색 DB의 Wedding/Event Planning 팔레트(primary #DB2777, 로맨틱 핑크)를
+     코럴(레퍼런스)과 겹치지 않게 조금 더 붉은 로즈로 옮기고, 흰 글씨 대비 4.62:1(AA)을 맞춘 값. 로고·선택 탭·주 버튼에만 씀.
+     높음/낮음은 한국 금융 앱 관례(토스)대로 빨강/파랑, 확인 필요는 호박색. 나머지는 흰 바탕 + 중립 회색.
+     사진 출처 (모두 Unsplash, Unsplash License) — d-photo.html과 같음:
+     - 라온홀:       https://unsplash.com/photos/7K67WDBrcIs  (images.unsplash.com/photo-1761110787206-2cc164e4913c)
+     - 채플 드 메이: https://unsplash.com/photos/aRQrz0fclB8  (images.unsplash.com/photo-1670529776180-60e4132ab90c)
+     - 가든 루체:    https://unsplash.com/photos/xMDo8y776uE  (images.unsplash.com/photo-1607861884586-c7cfaed16290)
+     - 더 리안:      https://unsplash.com/photos/m_CaYs0abOE  (images.unsplash.com/photo-1763429338698-439aa108e7fb)
+     - 포레 웨딩:    https://unsplash.com/photos/K8KiCHh4WU4  (images.unsplash.com/photo-1523438885200-e635ba2c371e)
+     - 스튜디오:     https://unsplash.com/photos/464ps_nOflw  (images.unsplash.com/photo-1520854221256-17451cc331bf)
+     - 드레스:       https://unsplash.com/photos/t3sYKMnFuPo  (images.unsplash.com/photo-1761116065261-586acfd09b7f)
+     - 메이크업:     https://unsplash.com/photos/tKUG1Ckuryw  (images.unsplash.com/photo-1773688189414-7637b9b138e1)
+     홀 이름은 모두 가상입니다. 아이콘은 Lucide(ISC) 모양을 inline SVG로 옮긴 한 세트. -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --brand:#D6336C;      /* 로즈: 로고, 선택된 탭, 주 버튼 */
+  --brand-ink:#B8285A;  /* 연한 로즈 위 글씨 */
+  --brand-t:#FDEEF3;
+  --ink:#191F28;        /* 제목 */
+  --ink-2:#4E5968;      /* 본문 보조 7.1:1 */
+  --ink-3:#6B7684;      /* 캡션 4.6:1 */
+  --ink-4:#B0B8C1;      /* 비활성 장식(글씨 아님) */
+  --line:#E5E8EB;
+  --fill:#F2F4F6;
+  --fill-2:#F9FAFB;
+  --up:#D63A2F;   --up-t:#FEEDEB;   --up-ink:#C42F25;
+  --down:#2563D9; --down-t:#EAF1FD; --down-ink:#2361D4;
+  --warn:#9A5800; --warn-t:#FFF4E0;
+  --kakao:#FEE500;
+  --ease:cubic-bezier(.2,0,0,1);
+  --sans:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{font-family:var(--sans);background:#fff;color:var(--ink);font-size:16px;line-height:1.5;letter-spacing:-.01em;
+  -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;touch-action:manipulation;word-break:keep-all;overflow-x:hidden}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit}
+.num{font-variant-numeric:tabular-nums}
+.ic{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+:focus-visible{outline:2px solid var(--brand);outline-offset:3px;border-radius:8px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.skip-link{position:fixed;left:16px;top:-64px;z-index:50;padding:12px 16px;border-radius:12px;background:var(--ink);color:#fff;font-weight:700;text-decoration:none}
+.skip-link:focus-visible{top:12px}
+section[id]{scroll-margin-top:64px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition-duration:.01ms!important}}
+
+.wrap{max-width:1200px;margin:0 auto;padding:0 40px}
+@media (max-width:720px){.wrap{padding:0 16px}}
+
+/* ───── 로고 ───── */
+.mark{width:32px;height:32px;flex:none;border-radius:9px;background:var(--brand);color:#fff;display:grid;place-items:center}
+.mark svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.brand{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:19px;letter-spacing:-.03em;text-decoration:none}
+
+/* ───── 상단 바 ───── */
+.site-top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9);backdrop-filter:saturate(1.6) blur(16px);-webkit-backdrop-filter:saturate(1.6) blur(16px);box-shadow:0 1px 0 var(--line)}
+.site-top .wrap{display:flex;align-items:center;gap:32px;height:64px}
+.site-top nav{display:flex;gap:4px;margin-left:auto}
+.site-top nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:10px;font-size:15px;font-weight:600;color:var(--ink-2);text-decoration:none;transition:background-color 150ms var(--ease)}
+.site-top nav a:hover{background:var(--fill)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:12px;background:var(--brand);color:#fff;
+  font-size:15px;font-weight:700;text-decoration:none;transition:transform 140ms var(--ease),background-color 150ms var(--ease)}
+.btn:hover{background:#C72C62}
+.btn:active{transform:scale(.96)}
+@media (max-width:720px){.site-top nav{display:none}.site-top .btn{margin-left:auto}}
+
+/* ───── 히어로 (16:9 소개 장표) ───── */
+.hero{overflow:clip}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);align-items:center;gap:40px;min-height:min(720px,calc(100vh - 64px));padding-top:40px;padding-bottom:40px}
+.hero-mark{width:64px;height:64px;border-radius:18px}
+.hero-mark svg{width:44px;height:44px;stroke-width:1.8}
+.logotype{display:flex;align-items:baseline;gap:12px;margin-top:24px}
+.logotype h1{font-size:72px;line-height:1;font-weight:800;letter-spacing:-.045em}
+.tag{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:8px;background:var(--fill);color:var(--ink-2);font-size:13px;font-weight:600;letter-spacing:0}
+.hero-desc{margin-top:24px;max-width:26em;font-size:20px;line-height:1.55;font-weight:500;color:var(--ink-2);text-wrap:pretty}
+.values{list-style:none;margin-top:40px;display:grid;gap:8px;max-width:440px}
+.values li{display:flex;align-items:center;gap:16px;padding:12px 16px 12px 12px;border-radius:16px;background:var(--fill-2)}
+.values .vi{width:44px;height:44px;flex:none;border-radius:12px;background:#fff;color:var(--ink);display:grid;place-items:center;box-shadow:0 0 0 1px rgba(0,0,0,.04),0 1px 2px rgba(0,0,0,.06)}
+.values b{display:block;font-size:16px;font-weight:700}
+.values span{font-size:14px;color:var(--ink-3)}
+
+.stage{position:relative;height:640px}
+.stage::before{content:"";position:absolute;left:50%;top:50%;width:600px;height:600px;border-radius:50%;background:var(--brand);transform:translate(-50%,-50%)}
+.stage .hp{position:absolute;left:50%;top:50%;--s:.56}
+.stage .hp .fit{transform:translate(-50%,-50%) translate(var(--x),var(--y)) rotate(var(--r))}
+.hp.p1{--x:-178px;--y:22px;--r:-8deg}
+.hp.p2{--x:0px;--y:-6px;--r:0deg;--s:.62;z-index:2}
+.hp.p3{--x:178px;--y:26px;--r:8deg}
+@media (max-width:1100px){.stage{height:560px}.stage::before{width:480px;height:480px}.stage .hp{--s:.48}.stage .hp.p2{--s:.54}.hp.p1{--x:-150px}.hp.p3{--x:150px}}
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr;min-height:0;gap:24px}
+  .logotype h1{font-size:56px}
+}
+@media (max-width:520px){
+  .stage{height:420px}.stage::before{width:340px;height:340px}
+  .stage .hp{--s:.36}.stage .hp.p2{--s:.41}.hp.p1{--x:-104px}.hp.p3{--x:104px}
+  .hero-desc{font-size:18px}
+}
+
+/* ───── 폰 프레임 (화면 390×844) ───── */
+.fit{width:calc(414px * var(--s));height:calc(868px * var(--s))}
+.device{width:414px;height:868px;padding:12px;border-radius:60px;background:#111418;transform:scale(var(--s));transform-origin:0 0;
+  box-shadow:inset 0 0 0 2px #2B3038,0 0 0 1px rgba(0,0,0,.08),0 30px 60px -20px rgba(25,31,40,.35),0 12px 24px -12px rgba(25,31,40,.2)}
+
+/* ───── 앱 화면 공통 ───── */
+.scr{position:relative;width:390px;height:844px;border-radius:48px;overflow:hidden;background:#fff;display:flex;flex-direction:column;font-size:15px;line-height:1.45;color:var(--ink);isolation:isolate}
+.sb{flex:none;position:relative;height:54px;display:flex;align-items:center;justify-content:space-between;padding:4px 28px 0 44px;font-size:17px;font-weight:600;letter-spacing:-.02em}
+.sb::after{content:"";position:absolute;left:50%;top:11px;width:126px;height:37px;margin-left:-63px;border-radius:20px;background:#000}
+.sb .r{display:flex;align-items:center;gap:6px}
+.sb svg{display:block}
+.hi{position:absolute;left:50%;bottom:8px;width:134px;height:5px;margin-left:-67px;border-radius:3px;background:var(--ink);z-index:30}
+.body{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;overscroll-behavior:contain}
+.body::-webkit-scrollbar{display:none}
+.pad{padding:0 24px}
+
+/* 표준 내비게이션 바 */
+.nb{flex:none;height:52px;display:grid;grid-template-columns:52px 1fr 52px;align-items:center;padding:0 4px}
+.nb h2{text-align:center;font-size:17px;font-weight:600;letter-spacing:-.02em}
+.ib{width:44px;height:44px;display:grid;place-items:center;border-radius:12px;color:var(--ink);transition:transform 140ms var(--ease),background-color 150ms var(--ease)}
+.ib:active{transform:scale(.96);background:var(--fill)}
+.nb .txt{font-size:16px;font-weight:600;color:var(--ink-2);width:auto;padding:0 8px}
+
+/* 하단 탭 */
+.tb{flex:none;height:83px;padding:6px 8px 34px;display:grid;grid-template-columns:repeat(5,1fr);background:rgba(255,255,255,.96);box-shadow:0 -1px 0 var(--line);position:relative;z-index:10}
+.tb a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;font-weight:600;color:var(--ink-3);text-decoration:none}
+.tb a .ic{width:24px;height:24px}
+.tb a[aria-current="page"]{color:var(--brand)}
+
+/* 칩 */
+.chip{display:inline-flex;align-items:center;height:24px;padding:0 8px;border-radius:6px;font-size:12px;font-weight:700;white-space:nowrap;letter-spacing:-.01em}
+.chip.up{background:var(--up-t);color:var(--up-ink)}
+.chip.down{background:var(--down-t);color:var(--down-ink)}
+.chip.same{background:var(--fill);color:var(--ink-2)}
+.chip.warn{background:var(--warn-t);color:var(--warn)}
+
+/* 큰 버튼 (하단 고정) */
+.cta-bar{flex:none;position:absolute;left:0;right:0;bottom:0;z-index:20;padding:24px 24px 42px;background:linear-gradient(rgba(255,255,255,0),#fff 24px)}
+.big-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:56px;border-radius:16px;background:var(--brand);color:#fff;font-size:17px;font-weight:700;transition:transform 140ms var(--ease)}
+.big-btn:active{transform:scale(.96)}
+
+.sec-h{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
+.sec-h h3{font-size:19px;font-weight:700;letter-spacing:-.03em}
+.sec-h .more{display:inline-flex;align-items:center;min-height:44px;margin-right:-8px;padding:0 8px;font-size:14px;color:var(--ink-3);font-weight:500}
+.band{height:12px;background:var(--fill);margin:24px 0}
+.photo{position:relative;overflow:hidden;background:var(--fill)}
+.photo img{width:100%;height:100%;object-fit:cover}
+.photo::after{content:"";position:absolute;inset:0;border-radius:inherit;outline:1px solid oklch(0 0 0 / .1);outline-offset:-1px;pointer-events:none}
+.av{display:inline-flex}
+.av i{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:700;box-shadow:0 0 0 2px #fff}
+.av i + i{margin-left:-8px}
+.av .mj{background:#FCE4EC;color:#A3264F}
+.av .jh{background:#E3ECFB;color:#1E55B3}
+
+/* ① 온보딩 */
+.onb .skip{align-self:flex-end;margin:0 12px 0 0;min-height:44px;padding:0 12px;font-size:15px;font-weight:500;color:var(--ink-3)}
+.collage{position:relative;display:grid;grid-template-columns:196px 1fr;grid-template-rows:1fr 1fr;gap:8px;height:368px;margin:8px 24px 0}
+.collage .photo{border-radius:16px}
+.collage .photo:first-child{grid-row:1 / 3}
+.float{position:absolute;left:16px;right:40px;bottom:-24px;display:flex;align-items:center;gap:12px;padding:12px 16px 12px 12px;border-radius:16px;background:#fff;
+  box-shadow:0 0 0 1px rgba(0,0,0,.04),0 8px 24px -8px rgba(25,31,40,.28)}
+.float .photo{width:44px;height:44px;border-radius:10px;flex:none}
+.float p{flex:1;min-width:0;font-size:13px;color:var(--ink-3);line-height:1.35}
+.float p b{display:block;font-size:16px;color:var(--ink);font-weight:700}
+.onb-t{margin-top:56px}
+.onb-t h3{font-size:28px;line-height:1.35;font-weight:700;letter-spacing:-.04em}
+.onb-t p{margin-top:8px;font-size:16px;color:var(--ink-2);text-wrap:pretty}
+.dots{display:flex;gap:6px;margin-top:24px}
+.dots i{width:6px;height:6px;border-radius:3px;background:var(--line)}
+.dots i.on{width:18px;background:var(--ink)}
+.auth{margin-top:auto;padding:0 24px 50px;display:grid;gap:8px}
+.auth button{display:flex;align-items:center;justify-content:center;gap:8px;height:56px;border-radius:16px;font-size:16px;font-weight:600;transition:transform 140ms var(--ease)}
+.auth button:active{transform:scale(.96)}
+.auth .kakao{background:var(--kakao);color:rgba(0,0,0,.85)}
+.auth .apple{background:#000;color:#fff}
+
+/* ② 홈 */
+.appbar{flex:none;height:52px;display:flex;align-items:center;gap:4px;padding:0 12px 0 24px}
+.appbar .brand{font-size:18px;margin-right:auto}
+.appbar .mark{width:26px;height:26px;border-radius:8px}
+.appbar .mark svg{width:18px;height:18px}
+.greet{padding:8px 24px 16px}
+.greet h3{font-size:22px;line-height:1.36;font-weight:700;letter-spacing:-.035em}
+.greet p{margin-top:4px;font-size:14px;color:var(--ink-3)}
+.cats{display:flex;gap:4px;padding:0 16px;box-shadow:inset 0 -1px 0 var(--line);overflow-x:auto;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cats a{flex:none;display:flex;align-items:center;min-height:44px;padding:0 8px;font-size:15px;font-weight:600;color:var(--ink-3);text-decoration:none;box-shadow:inset 0 -2px 0 transparent}
+.cats a[aria-selected="true"]{color:var(--ink);box-shadow:inset 0 -2px 0 var(--ink)}
+.banner{position:relative;height:164px;margin:16px 24px 0;border-radius:16px}
+.banner::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(17,20,24,.78) 0%,rgba(17,20,24,.45) 58%,rgba(17,20,24,.1) 100%)}
+.banner .bt{position:absolute;z-index:2;left:20px;top:20px;right:20px;color:#fff}
+.banner .bt small{font-size:13px;font-weight:500;color:rgba(255,255,255,.84)}
+.banner .bt p{margin-top:4px;font-size:20px;line-height:1.35;font-weight:700;letter-spacing:-.03em}
+.banner .bt span{display:inline-flex;align-items:center;gap:2px;margin-top:12px;font-size:13px;font-weight:600;color:#fff}
+.banner .bt span .ic{width:16px;height:16px}
+.banner .pg{position:absolute;z-index:2;right:12px;bottom:12px;height:24px;padding:0 10px;border-radius:12px;background:rgba(0,0,0,.42);color:#fff;font-size:12px;font-weight:600;display:flex;align-items:center}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px 12px}
+.hall .photo{aspect-ratio:1;border-radius:14px}
+.heart{position:absolute;z-index:2;top:2px;right:2px;width:44px;height:44px;display:grid;place-items:center;color:#fff}
+.heart .ic{filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
+.heart.on{color:var(--brand)}
+.heart.on .ic{fill:currentColor;stroke:#fff;stroke-width:1.6}
+.hall .loc{display:flex;align-items:center;gap:2px;margin-top:10px;font-size:12px;color:var(--ink-3)}
+.hall .loc .ic{width:14px;height:14px}
+.hall h4{margin-top:2px;font-size:15px;font-weight:600;letter-spacing:-.02em}
+.hall .pr{display:flex;align-items:center;gap:6px;margin-top:4px;font-size:14px;color:var(--ink-2)}
+.hall .pr b{color:var(--ink);font-weight:700}
+
+/* ③ 견적 비교 */
+.qc .lbl{font-size:14px;color:var(--ink-3)}
+.qc h3{margin-top:6px;font-size:26px;line-height:1.36;font-weight:700;letter-spacing:-.04em}
+.qc .lead-sub{margin-top:8px;font-size:15px;color:var(--ink-2)}
+.qc .lead-sub b{font-weight:600;color:var(--ink)}
+.item{padding:12px 0 16px}
+.item + .item{box-shadow:0 -1px 0 var(--line)}
+.item-h{display:flex;align-items:center;gap:8px}
+.item-h h4{font-size:16px;font-weight:600;margin-right:auto}
+.item-h b{font-size:16px;font-weight:700}
+.bars{display:grid;grid-template-columns:44px 1fr;align-items:center;gap:6px 8px;margin-top:10px;font-size:12px;color:var(--ink-3)}
+.bar{height:8px;border-radius:4px;background:var(--fill);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:4px;background:var(--ink-4)}
+.bar.me i{background:var(--ink)}
+.bars .v{grid-column:2;margin-top:-2px}
+.fee{display:flex;align-items:center;gap:12px;min-height:56px}
+.fee + .fee{box-shadow:0 -1px 0 var(--line)}
+.fee .t{flex:1;min-width:0}
+.fee strong{display:block;font-size:15px;font-weight:600}
+.fee span.s{font-size:13px;color:var(--ink-3)}
+.fee > .ic{width:20px;height:20px;color:var(--ink-4)}
+.ceiling{margin-top:8px;padding:16px 20px;border-radius:16px;background:var(--fill-2);box-shadow:inset 0 0 0 1px var(--line)}
+.ceiling p{font-size:14px;color:var(--ink-2)}
+.ceiling .big{margin-top:2px;font-size:26px;font-weight:800;letter-spacing:-.03em;color:var(--ink)}
+.ceiling .eq{margin-top:8px;font-size:13px;color:var(--ink-3)}
+
+/* ④ 홀 비교 */
+.picks{display:flex;gap:12px;padding:4px 24px 4px;overflow-x:auto;scrollbar-width:none}
+.picks::-webkit-scrollbar{display:none}
+.pk{flex:none;width:64px;text-align:center;font-size:12px;font-weight:600;color:var(--ink-2)}
+.pk .photo{width:64px;height:64px;border-radius:16px}
+.pk .photo::before{content:"";position:absolute;inset:0;z-index:1;border-radius:inherit;box-shadow:inset 0 0 0 2px var(--ink)}
+.pk .ck{position:absolute;z-index:2;right:4px;top:4px;width:20px;height:20px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center}
+.pk .ck .ic{width:12px;height:12px;stroke-width:3}
+.pk span{display:block;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pk.add .photo{display:grid;place-items:center;background:#fff;box-shadow:inset 0 0 0 1.5px var(--line);color:var(--ink-3)}
+.pk.add .photo::before,.pk.add .photo::after{display:none}
+.pk.add{color:var(--ink-3);font-weight:500}
+.basis{display:flex;align-items:center;justify-content:space-between;padding:20px 24px 4px}
+.basis h3{font-size:19px;font-weight:700;letter-spacing:-.03em}
+.sel{display:inline-flex;align-items:center;min-height:44px;margin-right:-8px;padding:0 8px;font-size:14px;font-weight:600;color:var(--ink-2)}
+.sel .ic{width:16px;height:16px;margin-left:2px}
+.rank{list-style:none;padding:4px 24px 0}
+.rank li{display:flex;align-items:center;gap:12px;min-height:56px}
+.rank .no{width:20px;flex:none;text-align:center;font-size:15px;font-weight:700;color:var(--ink-3)}
+.rank .photo{width:40px;height:40px;border-radius:10px;flex:none}
+.rank .nm{flex:1;min-width:0;font-size:15px;font-weight:600}
+.rank .amt{text-align:right}
+.rank .amt b{display:block;font-size:15px;font-weight:700}
+.rank .amt span{font-size:12px;color:var(--ink-3)}
+.rank li.first{margin:0 -12px 4px;padding:12px;border-radius:16px;background:var(--fill-2);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.rank li.first .no{color:var(--ink)}
+.rank li.first .photo{width:48px;height:48px;border-radius:12px}
+.rank li.first .amt b{font-size:17px}
+.rank li.first .amt span{color:var(--down-ink);font-weight:700}
+.badge{display:inline-flex;align-items:center;height:20px;margin-left:6px;padding:0 6px;border-radius:5px;background:var(--ink);color:#fff;font-size:11px;font-weight:700;vertical-align:2px}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:15;height:318px;padding:8px 0 34px;border-radius:24px 24px 0 0;background:#fff;
+  box-shadow:0 -1px 0 rgba(0,0,0,.04),0 -12px 32px -8px rgba(25,31,40,.18)}
+.grab{width:36px;height:5px;margin:0 auto 12px;border-radius:3px;background:var(--line)}
+.sheet-h{display:flex;align-items:baseline;justify-content:space-between;padding:0 24px 8px}
+.sheet-h h3{font-size:17px;font-weight:700}
+.sheet-h small{font-size:12px;color:var(--ink-3)}
+.ctab{width:100%;border-collapse:collapse;font-size:14px;table-layout:fixed}
+.ctab th,.ctab td{height:42px;padding:0 6px;text-align:right;box-shadow:inset 0 -1px 0 var(--line);white-space:nowrap}
+.ctab th:first-child{width:76px;padding-left:24px;text-align:left;font-size:13px;font-weight:500;color:var(--ink-3)}
+.ctab td:last-child,.ctab thead th:last-child{padding-right:24px}
+.ctab thead th{font-size:13px;font-weight:700;color:var(--ink)}
+.ctab td{font-weight:600}
+.ctab td.best{color:var(--down-ink)}
+.ctab td small{display:block;font-size:11px;font-weight:500;color:var(--ink-3);line-height:1.2}
+.ctab tbody tr:last-child th,.ctab tbody tr:last-child td{box-shadow:none}
+.ctab td.up{color:var(--up-ink)}
+
+/* ⑤ 일정 */
+.large{padding:4px 12px 8px 24px;display:flex;align-items:center;justify-content:space-between}
+.large h3{font-size:30px;font-weight:800;letter-spacing:-.04em}
+.dday{margin:0 24px;padding:20px;border-radius:20px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.05),0 2px 8px -2px rgba(25,31,40,.08)}
+.dday .top{display:flex;align-items:flex-end;justify-content:space-between}
+.dday small{font-size:14px;color:var(--ink-3)}
+.dday .d{font-size:40px;line-height:1.1;font-weight:800;letter-spacing:-.04em}
+.dday .date{font-size:14px;color:var(--ink-2);text-align:right}
+.prog{margin-top:20px}
+.prog .row{display:flex;justify-content:space-between;font-size:14px;color:var(--ink-2)}
+.prog .row b{color:var(--ink);font-weight:700}
+.prog .bar{height:8px;margin-top:8px}
+.prog .bar i{background:var(--brand)}
+.week{display:grid;grid-template-columns:repeat(7,1fr);margin:20px 16px 0;text-align:center}
+.week span{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;color:var(--ink-3)}
+.week b{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:16px;font-weight:600;color:var(--ink)}
+.week .today b{background:var(--ink);color:#fff}
+.week i{width:4px;height:4px;border-radius:2px;background:transparent}
+.week .has i{background:var(--brand)}
+.todo{list-style:none;padding:0 24px}
+.todo li{display:flex;align-items:center;gap:12px;min-height:64px}
+.todo li + li{box-shadow:0 -1px 0 var(--line)}
+.cb{width:44px;height:44px;margin-left:-10px;flex:none;display:grid;place-items:center}
+.cb i{width:24px;height:24px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--line);display:grid;place-items:center;color:#fff}
+.cb i .ic{width:14px;height:14px;stroke-width:3}
+.done .cb i{background:var(--ink);box-shadow:none}
+.todo .t{flex:1;min-width:0}
+.todo strong{display:block;font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.todo .t span{font-size:13px;color:var(--ink-3)}
+.todo .t span.due{color:var(--up-ink);font-weight:600}
+.done strong{color:var(--ink-3);text-decoration:line-through;text-decoration-color:var(--ink-4)}
+.toast{position:absolute;left:16px;right:16px;bottom:95px;z-index:25;display:flex;align-items:center;gap:10px;padding:14px 16px;border-radius:16px;background:rgba(25,31,40,.94);color:#fff;font-size:14px;font-weight:500;
+  box-shadow:0 8px 24px -8px rgba(0,0,0,.4)}
+.toast .ok{width:22px;height:22px;flex:none;border-radius:50%;background:#fff;color:var(--ink);display:grid;place-items:center}
+.toast .ok .ic{width:14px;height:14px;stroke-width:3}
+.toast span{flex:1}
+.toast a{font-weight:700;color:#fff;text-decoration:none;padding:0 2px}
+
+/* ───── 화면 갤러리 ───── */
+.gallery{background:var(--fill-2);padding:104px 0 96px;box-shadow:inset 0 1px 0 var(--line),inset 0 -1px 0 var(--line)}
+.g-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.g-head h2,.feat h2{font-size:40px;line-height:1.3;font-weight:800;letter-spacing:-.04em;text-wrap:balance}
+.g-head p,.feat .lead{margin-top:12px;font-size:18px;color:var(--ink-2)}
+.arrows{display:flex;gap:8px;flex:none}
+.arrows button{width:48px;height:48px;border-radius:50%;background:#fff;color:var(--ink);display:grid;place-items:center;box-shadow:0 0 0 1px var(--line);transition:transform 140ms var(--ease),opacity 150ms var(--ease)}
+.arrows button:hover:not(:disabled){box-shadow:0 0 0 1px var(--ink-4)}
+.arrows button:active{transform:scale(.96)}
+.arrows button:disabled{opacity:.35;cursor:default}
+.reel{--s:.76;display:flex;gap:40px;margin-top:48px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;
+  padding:8px max(40px,calc((100vw - 1200px) / 2 + 40px)) 24px;scroll-padding-inline:max(40px,calc((100vw - 1200px) / 2 + 40px))}
+.reel::-webkit-scrollbar{display:none}
+.shot{flex:none;scroll-snap-align:start;width:calc(414px * var(--s))}
+.shot figcaption{margin-top:28px;padding-right:8px}
+.shot figcaption h3{font-size:19px;font-weight:700;letter-spacing:-.03em}
+.shot figcaption p{margin-top:6px;font-size:15px;color:var(--ink-2);text-wrap:pretty}
+@media (max-width:720px){
+  .gallery{padding:72px 0 64px}
+  .g-head h2,.feat h2{font-size:30px}
+  .g-head p,.feat .lead{font-size:16px}
+  .arrows{display:none}
+  .reel{--s:.66;gap:24px;padding-inline:16px;scroll-padding-inline:16px}
+}
+
+/* ───── 기능 ───── */
+.feat{padding:104px 0}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.card{padding:32px 28px;border-radius:24px;background:#fff;box-shadow:0 0 0 1px var(--line)}
+.card .fi{width:48px;height:48px;border-radius:14px;background:var(--fill);color:var(--ink);display:grid;place-items:center}
+.card h3{margin-top:24px;font-size:20px;font-weight:700;letter-spacing:-.03em}
+.card p{margin-top:8px;font-size:16px;line-height:1.6;color:var(--ink-2);text-wrap:pretty}
+.card .eg{display:flex;align-items:center;gap:8px;margin-top:20px;padding-top:20px;box-shadow:inset 0 1px 0 var(--line);font-size:14px;color:var(--ink-3)}
+.card .eg b{color:var(--ink);font-weight:700}
+@media (max-width:900px){.cards{grid-template-columns:1fr}.feat{padding:72px 0}}
+
+footer{padding:40px 0 56px;box-shadow:inset 0 1px 0 var(--line);font-size:13px;color:var(--ink-3)}
+footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+footer .brand{font-size:16px;color:var(--ink)}
+footer .mark{width:26px;height:26px;border-radius:8px}
+footer .mark svg{width:18px;height:18px}
+footer p{max-width:640px;line-height:1.6}
+</style>
+</head>
+<body>
+
+<!-- 아이콘 한 세트 (Lucide 모양, 24×24, 선 2) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-logo" viewBox="0 0 24 24"><path d="M9.5 5.5 12 3l2.5 2.5"/><circle cx="12" cy="14" r="7"/><path d="m9 14.2 2.1 2.1L15.2 12"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-share" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="m16 6-4-4-4 4"/><path d="M12 2v13"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></symbol>
+    <symbol id="i-ask" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip-link" href="#top">본문으로 건너뛰기</a>
+<header class="site-top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Ourwed 처음으로"><span class="mark"><svg aria-hidden="true"><use href="#i-logo"/></svg></span>Ourwed</a>
+    <nav aria-label="페이지 안 이동"><a href="#screens">화면</a><a href="#features">기능</a></nav>
+    <a class="btn" href="#screens">출시 알림 받기</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- 1. 소개 장표 -->
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="wrap">
+      <div>
+        <span class="mark hero-mark" aria-hidden="true"><svg><use href="#i-logo"/></svg></span>
+        <div class="logotype"><h1 id="hero-h" translate="no">Ourwed</h1><span class="tag">가칭</span></div>
+        <p class="hero-desc">예비부부가 함께 쓰는 결혼 준비 앱. 내 웨딩 견적이 적정한지 지역 평균과 비교해 드려요.</p>
+        <ul class="values">
+          <li><span class="vi"><svg class="ic" aria-hidden="true"><use href="#i-chart"/></svg></span><div><b>견적 비교</b><span>웨딩홀·스드메 견적을 지역 중간값과 항목별로</span></div></li>
+          <li><span class="vi"><svg class="ic" aria-hidden="true"><use href="#i-users"/></svg></span><div><b>둘이 함께</b><span>투어 기록과 할 일을 둘이 나눠 맡기</span></div></li>
+          <li><span class="vi"><svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg></span><div><b>숨은 추가금</b><span>계약 전에 물어볼 항목과 최대 금액을 미리</span></div></li>
+        </ul>
+      </div>
+      <div class="stage" aria-hidden="true">
+        <div class="hp p1"><div class="fit"><div class="device" data-screen="onb"></div></div></div>
+        <div class="hp p3"><div class="fit"><div class="device" data-screen="quote"></div></div></div>
+        <div class="hp p2"><div class="fit"><div class="device" data-screen="home"></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 화면 갤러리 -->
+  <section class="gallery" id="screens" aria-labelledby="g-h">
+    <div class="wrap g-head">
+      <div>
+        <h2 id="g-h">견적 확인부터 예식 날까지</h2>
+        <p>Ourwed의 핵심 화면 다섯 개예요. 각 화면 안은 스크롤해서 볼 수 있어요.</p>
+      </div>
+      <div class="arrows">
+        <button type="button" id="prev" aria-label="이전 화면"><svg class="ic" aria-hidden="true"><use href="#i-left"/></svg></button>
+        <button type="button" id="next" aria-label="다음 화면"><svg class="ic" aria-hidden="true"><use href="#i-right"/></svg></button>
+      </div>
+    </div>
+    <div class="reel" id="reel" role="list" aria-label="앱 화면">
+      <figure class="shot" role="listitem"><div class="fit"><div class="device" data-screen="onb"></div></div>
+        <figcaption><h3>온보딩</h3><p>첫 화면에서 앱이 답해 줄 질문 하나만 보여 줘요.</p></figcaption></figure>
+      <figure class="shot" role="listitem"><div class="fit"><div class="device" data-screen="home"></div></div>
+        <figcaption><h3>홈</h3><p>예식까지 남은 날, 지역 시세, 투어한 웨딩홀을 사진으로.</p></figcaption></figure>
+      <figure class="shot" role="listitem"><div class="fit"><div class="device" data-screen="quote"></div></div>
+        <figcaption><h3>견적 비교</h3><p>결론 한 문장 먼저, 항목별 막대와 숨은 추가금은 그 아래.</p></figcaption></figure>
+      <figure class="shot" role="listitem"><div class="fit"><div class="device" data-screen="halls"></div></div>
+        <figcaption><h3>홀 비교</h3><p>최대 5곳을 하객 200명 기준 총비용 순으로 줄 세워요.</p></figcaption></figure>
+      <figure class="shot" role="listitem"><div class="fit"><div class="device" data-screen="plan"></div></div>
+        <figcaption><h3>일정·체크리스트</h3><p>이번 주 할 일을 누가 맡았는지 보이게, 끝내면 서로 알림.</p></figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 3. 기능 -->
+  <section class="feat" id="features" aria-labelledby="f-h">
+    <div class="wrap">
+      <h2 id="f-h">계약하기 전에 알아야 할 것들</h2>
+      <p class="lead">견적서를 받은 그날 바로 확인할 수 있게 만들었어요.</p>
+      <div class="cards">
+        <article class="card">
+          <span class="fi"><svg class="ic" aria-hidden="true"><use href="#i-chart"/></svg></span>
+          <h3>지역 평균과 견적 비교</h3>
+          <p>견적서를 올리면 스튜디오, 드레스, 메이크업, 웨딩홀 식대를 같은 지역 중간값과 나란히 보여 드려요.</p>
+          <p class="eg">예: 스드메 합계 <b class="num">4,850,000원</b>, 평균보다 <b class="num">54만 원</b> 높음</p>
+        </article>
+        <article class="card">
+          <span class="fi"><svg class="ic" aria-hidden="true"><use href="#i-users"/></svg></span>
+          <h3>둘이 같이 쓰는 계정</h3>
+          <p>한 사람이 투어 사진을 올리거나 할 일을 끝내면 다른 사람에게 바로 알림이 가요. 누가 맡았는지도 보여요.</p>
+          <p class="eg"><span class="av" aria-hidden="true"><i class="mj">민</i><i class="jh">준</i></span>이번 주 할 일 <b class="num">5</b>개 중 <b class="num">1</b>개 완료</p>
+        </article>
+        <article class="card">
+          <span class="fi"><svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg></span>
+          <h3>숨은 추가금 미리 보기</h3>
+          <p>원본 데이터, 헬퍼비, 얼리스타트처럼 견적서에 빠지기 쉬운 항목을 짚고, 업체에 물어볼 질문을 만들어 드려요.</p>
+          <p class="eg">추가금까지 넣으면 최대 <b class="num">5,420,000원</b></p>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="brand"><span class="mark" aria-hidden="true"><svg><use href="#i-logo"/></svg></span>Ourwed <span class="tag">가칭</span></span>
+    <p>시안 G. 지역 중간값은 한국소비자원 참가격 2026년 9월 조사 기준 예시이고, 홀 이름은 가상입니다. 사진은 Unsplash 예시입니다.</p>
+  </div>
+</footer>
+
+<script>
+const U = (id, w = 600, h = w, extra = '') => `https://images.unsplash.com/${id}?w=${w}&h=${h}&q=80&auto=format&fit=crop${extra}`;
+const IMG = {
+  raon:'photo-1761110787206-2cc164e4913c', chapel:'photo-1670529776180-60e4132ab90c', garden:'photo-1607861884586-c7cfaed16290',
+  lian:'photo-1763429338698-439aa108e7fb', foret:'photo-1523438885200-e635ba2c371e',
+  studio:'photo-1520854221256-17451cc331bf', dress:'photo-1761116065261-586acfd09b7f', makeup:'photo-1773688189414-7637b9b138e1'
+};
+// 서울 강남 중간값: 식대 88,000원, 대관료 7,500,000원 → 하객 200명 총비용 25,100,000원
+const MEAL = 88000, GUESTS = 200, MED_TOTAL = 25100000;
+const HALLS = [
+  {k:'raon',   name:'라온홀',       meal:95000, rent:7000000, min:250, alt:'샹들리에 아래 원형 테이블이 놓인 연회장', saved:true},
+  {k:'chapel', name:'채플 드 메이', meal:88000, rent:8500000, min:200, alt:'흰 꽃 아치와 금색 의자가 놓인 예식 통로', saved:true},
+  {k:'garden', name:'가든 루체',    meal:79000, rent:5500000, min:220, alt:'조명이 켜진 야외 정원 예식장', saved:true},
+  {k:'lian',   name:'더 리안',      meal:99000, rent:9000000, min:200, alt:'연회 테이블이 차려진 실내 홀'},
+  {k:'foret',  name:'포레 웨딩',    meal:85000, rent:6000000, min:180, alt:'초록 나무에 둘러싸인 야외 정자'},
+];
+HALLS.forEach(h => h.total = h.meal * Math.max(h.min, GUESTS) + h.rent);
+const won = n => n.toLocaleString('ko-KR') + '원';
+const man = n => Math.round(n / 10000).toLocaleString('ko-KR') + '만 원';
+const ic = (id, cls = 'ic') => `<svg class="${cls}" aria-hidden="true"><use href="#i-${id}"/></svg>`;
+const vsMed = (v, med) => {
+  const p = Math.round((v - med) / med * 100);
+  return Math.abs(p) <= 5 ? {cls:'same', t:'비슷함'} : p > 0 ? {cls:'up', t:'+' + p + '%'} : {cls:'down', t:'−' + -p + '%'};
+};
+
+const STATUS = `<div class="sb"><span class="num">9:41</span><span class="r">
+  <svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+  <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.4c2.3 0 4.4.9 6 2.4l1.2-1.3A10.3 10.3 0 0 0 8 .6C5.2.6 2.7 1.7.8 3.5L2 4.8a8.5 8.5 0 0 1 6-2.4Zm0 3.6c1.3 0 2.5.5 3.4 1.3l1.2-1.3A6.8 6.8 0 0 0 8 4.2c-1.8 0-3.4.7-4.6 1.8l1.2 1.3c.9-.8 2.1-1.3 3.4-1.3Zm0 3.5c-.5 0-1 .2-1.3.5L8 11.4l1.3-1.4c-.3-.3-.8-.5-1.3-.5Z"/></svg>
+  <svg width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.8" fill="none" stroke="currentColor" opacity=".35"/><rect x="2" y="2" width="20" height="9" rx="2.5" fill="currentColor"/><path d="M25 4.5v4c.8-.3 1.4-1.1 1.4-2s-.6-1.7-1.4-2Z" fill="currentColor" opacity=".4"/></svg>
+</span></div>`;
+const HI = '<span class="hi"></span>';
+const TABS = cur => `<nav class="tb" aria-label="앱 탭">${[['home','홈'],['chart','견적'],['cal','일정'],['heart','찜'],['user','마이']]
+  .map(([i, t]) => `<a href="#"${t === cur ? ' aria-current="page"' : ''}>${ic(i)}${t}</a>`).join('')}</nav>`;
+const LOGO = `<span class="brand"><span class="mark">${ic('logo', '')}</span>Ourwed</span>`.replace('<svg class=""', '<svg');
+
+const SCREENS = {
+  // ① 온보딩
+  onb: () => `<div class="scr onb">${STATUS}
+    <button class="skip" type="button">건너뛰기</button>
+    <div class="collage">
+      <div class="photo"><img src="${U(IMG.garden, 420, 680)}" alt="야외 정원 예식장" width="196" height="328"></div>
+      <div class="photo"><img src="${U(IMG.chapel, 300, 320)}" alt="흰 꽃 아치가 있는 예식 통로" width="138" height="160"></div>
+      <div class="photo"><img src="${U(IMG.dress, 300, 320, '&crop=top')}" alt="웨딩드레스" width="138" height="160"></div>
+      <div class="float">
+        <span class="photo"><img src="${U(IMG.garden, 96)}" alt="" width="44" height="44"></span>
+        <p>가든 루체 식대<b class="num">79,000원</b></p>
+        <span class="chip down num">평균보다 −10%</span>
+      </div>
+    </div>
+    <div class="pad onb-t">
+      <h3>우리 견적, 비싼 걸까?</h3>
+      <p>받은 견적서를 올리면 서울 강남 평균과 항목별로 비교해 드려요.</p>
+      <div class="dots" role="img" aria-label="소개 1/3"><i class="on"></i><i></i><i></i></div>
+    </div>
+    <div class="auth">
+      <button class="kakao" type="button"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3.5c-5 0-9 3.1-9 7 0 2.5 1.7 4.7 4.2 5.9l-.9 3.4c-.1.3.3.6.6.4l4-2.7h1.1c5 0 9-3.1 9-7s-4-7-9-7Z"/></svg>카카오로 시작하기</button>
+      <button class="apple" type="button"><svg width="18" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 1.4c0 1.1-.5 2.3-1.2 3.1-.7.9-2 1.6-3 1.6-.1 0-.2 0-.3-.1v-.4c0-1.1.6-2.3 1.2-3 .8-.9 2.1-1.6 3.2-1.7l.1.5Zm4.5 15.7c0 .1-.5 1.6-1.5 3.1-.9 1.3-1.9 2.7-3.4 2.7s-1.9-.9-3.6-.9-2.3.9-3.7.9-2.3-1.3-3.4-2.8C4 18.3 3 15.5 3 12.8c0-4.3 2.8-6.5 5.6-6.5 1.4 0 2.7.9 3.6.9.9 0 2.2-1 3.9-1 .6 0 2.9.1 4.4 2.2-.1.1-2.4 1.4-2.4 4.2 0 3.3 2.9 4.4 2.9 4.5Z"/></svg>Apple로 계속하기</button>
+    </div>${HI}</div>`,
+
+  // ② 홈
+  home: () => `<div class="scr">${STATUS}
+    <div class="appbar">${LOGO}<button class="ib" type="button" aria-label="검색">${ic('search')}</button><button class="ib" type="button" aria-label="알림">${ic('bell')}</button></div>
+    <div class="body">
+      <div class="greet"><h3>민지님, 예식까지 <span class="num">D-127</span></h3><p class="num">2027년 4월 10일 토요일, 준호님과 함께 준비 중</p></div>
+      <div class="cats" role="tablist" aria-label="카테고리">${['웨딩홀','스튜디오','드레스','메이크업','청첩장'].map((c, i) => `<a href="#" role="tab" aria-selected="${!i}">${c}</a>`).join('')}</div>
+      <div class="banner photo"><img src="${U(IMG.raon, 720, 330)}" alt="" width="342" height="164">
+        <div class="bt"><small>11월 지역 시세</small><p>서울 강남 웨딩홀<br>평균 식대 <span class="num">88,000원</span></p><span>내 견적과 비교하기${ic('right')}</span></div>
+        <span class="pg num">1 / 3</span></div>
+      <div class="pad" style="padding-top:28px;padding-bottom:24px">
+        <div class="sec-h"><h3>투어한 웨딩홀 <span class="num" style="color:var(--ink-3);font-weight:600">${HALLS.length}</span></h3><a class="more" href="#">전체보기</a></div>
+        <div class="grid2">${HALLS.map(h => { const c = vsMed(h.meal, MEAL); return `<article class="hall">
+          <div class="photo" style="border-radius:14px;aspect-ratio:1"><img src="${U(IMG[h.k], 360)}" alt="${h.alt}" width="165" height="165">
+            <button class="heart${h.saved ? ' on' : ''}" type="button" aria-label="${h.name} 찜${h.saved ? ' 해제' : ''}" aria-pressed="${!!h.saved}">${ic('heart')}</button></div>
+          <p class="loc">${ic('pin')}서울 강남</p><h4>${h.name}</h4>
+          <p class="pr num">1인당 <b>${won(h.meal)}</b><span class="chip ${c.cls}">${c.t}</span></p></article>`; }).join('')}</div>
+      </div>
+    </div>${TABS('홈')}${HI}</div>`,
+
+  // ③ 견적 비교
+  quote: () => `<div class="scr qc">${STATUS}
+    <div class="nb"><button class="ib" type="button" aria-label="뒤로">${ic('left')}</button><h2>견적 비교</h2><button class="ib" type="button" aria-label="공유">${ic('share')}</button></div>
+    <div class="body" style="padding-bottom:132px">
+      <div class="pad" style="padding-top:12px">
+        <p class="lbl">스드메 합계, 서울 강남 중간값 기준</p>
+        <h3>스드메 견적이 평균보다<br><span class="num">54만 원</span> 높아요</h3>
+        <p class="lead-sub num">내 견적 <b>4,850,000원</b>, 평균 <b>4,310,000원</b></p>
+      </div>
+      <div class="band"></div>
+      <div class="pad">
+        <div class="sec-h" style="margin-bottom:0"><h3>항목별 비교</h3></div>
+        ${[['스튜디오',1800000,1530000],['드레스',2100000,1780000],['메이크업',950000,1000000]].map(([n, me, med]) => { const c = vsMed(me, med), max = 2100000; return `<div class="item">
+          <div class="item-h"><h4>${n}</h4><span class="chip ${c.cls} num">${c.t}</span><b class="num">${won(me)}</b></div>
+          <div class="bars num"><span>내 견적</span><div class="bar me"><i style="width:${me / max * 100}%"></i></div>
+            <span>평균</span><div class="bar"><i style="width:${med / max * 100}%"></i></div><span class="v">평균 ${won(med)}</span></div></div>`; }).join('')}
+      </div>
+      <div class="band" style="margin-top:8px"></div>
+      <div class="pad">
+        <div class="sec-h" style="margin-bottom:0"><h3>숨은 추가금</h3><span class="chip warn">3개 확인 필요</span></div>
+        ${[['스튜디오 원본 데이터','약 22만 원'],['드레스 헬퍼비','약 25만 원'],['메이크업 얼리스타트','약 10만 원']].map(([t, v]) => `<button class="fee" type="button" style="width:100%;text-align:left">
+          <span class="t"><strong>${t}</strong><span class="s num">보통 ${v}</span></span><span class="chip warn">확인 필요</span>${ic('right')}</button>`).join('')}
+        <div class="ceiling"><p>추가금까지 넣으면 최대</p><p class="big num">5,420,000원</p><p class="eq num">견적 4,850,000원 + 추가금 570,000원</p></div>
+      </div>
+    </div>
+    <div class="cta-bar"><button class="big-btn" type="button">${ic('ask')}업체에 물어볼 질문 보기</button></div>${HI}</div>`,
+
+  // ④ 홀 비교
+  halls: () => { const list = [...HALLS].sort((a, b) => a.total - b.total), first = list[0], top3 = list.slice(0, 3);
+    const row = (label, f) => `<tr><th scope="row">${label}</th>${top3.map(h => f(h)).join('')}</tr>`;
+    return `<div class="scr">${STATUS}
+    <div class="nb"><button class="ib" type="button" aria-label="뒤로">${ic('left')}</button><h2>홀 비교</h2><button class="ib txt" type="button">편집</button></div>
+    <div class="body">
+      <div class="picks" role="group" aria-label="비교할 홀, 최대 5곳">${HALLS.map(h => `<span class="pk"><span class="photo" style="display:block"><img src="${U(IMG[h.k], 140)}" alt="" width="64" height="64"><span class="ck">${ic('check')}</span></span><span>${h.name}</span></span>`).join('')}
+        <span class="pk add"><span class="photo">${ic('plus')}</span><span>5곳 꽉 참</span></span></div>
+      <div class="basis"><h3>총비용 낮은 순</h3><button class="sel" type="button">하객 <span class="num">200</span>명 기준${ic('down')}</button></div>
+      <ol class="rank">${list.map((h, k) => `<li class="${k ? '' : 'first'}"><span class="no num">${k + 1}</span>
+        <span class="photo"><img src="${U(IMG[h.k], 120)}" alt="" width="48" height="48"></span>
+        <span class="nm">${h.name}${k ? '' : '<span class="badge">1위</span>'}</span>
+        <span class="amt"><b class="num">${won(h.total)}</b><span class="num">${k ? '1위보다 +' + man(h.total - first.total) : '가장 저렴'}</span></span></li>`).join('')}</ol>
+    </div>
+    <section class="sheet" aria-label="상세 비교표"><div class="grab"></div>
+      <div class="sheet-h"><h3>상세 비교</h3><small>총비용 1~3위</small></div>
+      <table class="ctab num"><thead><tr><th scope="col"><span class="sr">항목</span></th>${top3.map(h => `<th scope="col">${h.name}</th>`).join('')}</tr></thead><tbody>
+        ${row('식대', h => `<td class="${h.meal === Math.min(...top3.map(x => x.meal)) ? 'best' : ''}">${h.meal.toLocaleString('ko-KR')}</td>`)}
+        ${row('대관료', h => `<td class="${h.rent === Math.min(...top3.map(x => x.rent)) ? 'best' : ''}">${man(h.rent)}</td>`)}
+        ${row('보증 인원', h => `<td>${h.min}명${h.min > GUESTS ? `<small>${h.min - GUESTS}명분 더 냄</small>` : ''}</td>`)}
+        ${row('평균 대비', h => { const p = Math.round((h.total - MED_TOTAL) / MED_TOTAL * 100); return `<td class="${p < 0 ? 'best' : 'up'}">${p < 0 ? '−' + -p : '+' + p}%</td>`; })}
+      </tbody></table></section>${HI}</div>`; },
+
+  // ⑤ 일정·체크리스트
+  plan: () => `<div class="scr">${STATUS}
+    <div class="body">
+      <div class="large"><h3>일정</h3><button class="ib" type="button" aria-label="할 일 추가">${ic('plus')}</button></div>
+      <div class="dday">
+        <div class="top"><div><small>예식까지</small><p class="d num">D-127</p></div><p class="date num">2027년 4월 10일<br>토요일 오후 1시</p></div>
+        <div class="prog"><div class="row num"><span>준비 진행률</span><span><b>42%</b>, 24개 중 10개</span></div>
+          <div class="bar" role="img" aria-label="진행률 42%"><i style="width:42%"></i></div></div>
+      </div>
+      <div class="week num" aria-label="이번 주">${[['월',23],['화',24],['수',25],['목',26],['금',27],['토',28],['일',29]].map(([d, n]) =>
+        `<span class="${n === 26 ? 'today' : ''} ${[26,27,28,29].includes(n) ? 'has' : ''}">${d}<b>${n}</b><i></i></span>`).join('')}</div>
+      <div class="pad" style="padding-top:28px"><div class="sec-h" style="margin-bottom:0"><h3>이번 주 할 일 <span class="num" style="color:var(--ink-3);font-weight:600">5</span></h3><a class="more" href="#">전체</a></div></div>
+      <ul class="todo">
+        ${[['스튜디오에 원본 데이터 포함 여부 묻기','오늘까지','mj',0,1],['드레스 헬퍼비 견적 받기','11월 27일 (금)','mj',0],['하객 명단 1차 정리','11월 28일 (토)','jh',0],['포레 웨딩 투어','11월 29일 (일) 오후 2시','both',0],['가든 루체 계약금 입금 확인','완료','jh',1]]
+          .map(([t, d, who, done, due]) => `<li class="${done ? 'done' : ''}"><button class="cb" type="button" role="checkbox" aria-checked="${!!done}" aria-label="${t}"><i>${done ? ic('check') : ''}</i></button>
+            <div class="t"><strong>${t}</strong><span class="num${due ? ' due' : ''}">${d}</span></div>
+            <span class="av" aria-label="담당 ${who === 'both' ? '민지, 준호' : who === 'mj' ? '민지' : '준호'}">${who !== 'jh' ? '<i class="mj">민</i>' : ''}${who !== 'mj' ? '<i class="jh">준</i>' : ''}</span></li>`).join('')}
+      </ul>
+      <div style="height:96px"></div>
+    </div>
+    <div class="toast" role="status"><span class="ok">${ic('check')}</span><span>준호님이 계약금 입금 확인을 끝냈어요</span><a href="#">보기</a></div>
+    ${TABS('일정')}${HI}</div>`,
+};
+
+document.querySelectorAll('[data-screen]').forEach(el => {
+  el.innerHTML = SCREENS[el.dataset.screen]();
+  // 소개 장표의 폰은 장식: 포커스·스크린리더에서 뺀다
+  if (el.closest('.stage')) { el.inert = true; el.querySelectorAll('img').forEach(i => i.alt = ''); }
+  else el.querySelectorAll('img').forEach(i => i.loading = 'lazy');
+});
+
+// 갤러리 좌우 버튼
+const reel = document.getElementById('reel'), prev = document.getElementById('prev'), next = document.getElementById('next');
+const step = () => reel.querySelector('.shot').offsetWidth + 40;
+prev.onclick = () => reel.scrollBy({left: -step(), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+next.onclick = () => reel.scrollBy({left: step(), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+const sync = () => { prev.disabled = reel.scrollLeft < 4; next.disabled = reel.scrollLeft + reel.clientWidth >= reel.scrollWidth - 4; };
+reel.addEventListener('scroll', sync, {passive:true}); addEventListener('resize', sync); sync();
+</script>
+</body>
+</html>

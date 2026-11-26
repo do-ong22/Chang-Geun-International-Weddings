@@ -27,11 +27,40 @@
 | **2단계** | 식장 스타일 기반 모바일 청첩장 |
 | **3단계** | 계약서 점검(비전 LLM) |
 
-## 🛠 기술 스택 (제안)
-- **Frontend / Backend**: Next.js
+## 🛠 기술 스택
+pnpm 모노레포, TypeScript.
+
+| 경로 | 내용 |
+|---|---|
+| `apps/web` | Next.js 16 웹 |
+| `apps/mobile` | Expo 앱 (예정) |
+| `packages/core` | 웹·앱 공유 계산 로직 |
+| `supabase` | DB 스키마와 RLS |
+
 - **Database / Auth**: Supabase
 - **AI**: LLM API (체크리스트 생성, 계약서 점검)
 - **Deploy**: Vercel
+
+## 🚀 시작하기
+Node.js 20 이상과 pnpm이 필요합니다.
+
+```bash
+pnpm install
+cp apps/web/.env.example apps/web/.env.local   # Supabase URL과 publishable key 입력
+pnpm dev
+```
+
+`pnpm test`, `pnpm typecheck`, `pnpm lint`, `pnpm build`도 루트에서 실행합니다.
+
+### 로컬 Supabase (Docker 필요)
+```bash
+pnpm exec supabase start          # 로컬 DB를 띄우고 supabase/migrations 적용
+pnpm exec supabase status -o env  # API_URL, PUBLISHABLE_KEY를 apps/web/.env.local에 넣기
+pnpm exec supabase stop
+```
+Studio(DB 관리 화면): http://127.0.0.1:54323
+
+> ⚠ `supabase/config.jsonc`는 **로컬 전용**입니다(이메일 확인 꺼짐, 약한 비밀번호 정책). 운영 프로젝트에 `supabase config push`로 올리지 말고, 운영 인증 설정은 Supabase 대시보드에서 관리합니다.
 
 ---
 © 2026 AI Wedding Planning Project Team. All rights reserved.

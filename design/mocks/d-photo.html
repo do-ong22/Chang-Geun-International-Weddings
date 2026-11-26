@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>내 견적 비교 — 시안 D</title>
+<!-- 시안 D: "투어 앨범" — 둘이 다녀온 웨딩홀을 사진으로 넘겨 보고, 아래 숫자로 확인한다.
+     정보 순서는 시안 C(결론 → 가장 큰 위험 → 비교), 숫자는 시안 B(중간값 눈금 위 점, 진한 최대액 박스).
+     사진 출처 (모두 Unsplash, Unsplash License):
+     - 라온홀:       https://unsplash.com/photos/7K67WDBrcIs  (images.unsplash.com/photo-1761110787206-2cc164e4913c)
+     - 채플 드 메이: https://unsplash.com/photos/aRQrz0fclB8  (images.unsplash.com/photo-1670529776180-60e4132ab90c)
+     - 가든 루체:    https://unsplash.com/photos/xMDo8y776uE  (images.unsplash.com/photo-1607861884586-c7cfaed16290)
+     - 더 리안:      https://unsplash.com/photos/m_CaYs0abOE  (images.unsplash.com/photo-1763429338698-439aa108e7fb)
+     - 포레 웨딩:    https://unsplash.com/photos/K8KiCHh4WU4  (images.unsplash.com/photo-1523438885200-e635ba2c371e)
+     - 스튜디오:     https://unsplash.com/photos/464ps_nOflw  (images.unsplash.com/photo-1520854221256-17451cc331bf)
+     - 드레스:       https://unsplash.com/photos/t3sYKMnFuPo  (images.unsplash.com/photo-1761116065261-586acfd09b7f)
+     - 메이크업:     https://unsplash.com/photos/tKUG1Ckuryw  (images.unsplash.com/photo-1773688189414-7637b9b138e1)
+     홀 이름은 모두 가상입니다. 실제 업체 사진은 쓰지 않았고, 실서비스에서는 커플이 찍은 투어 사진 또는 업체가 직접 등록·허락한 사진만 씁니다. -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&display=swap">
+<style>
+:root{
+  --bg:#F3F1F4;        /* 한지빛 연보라 회색 */
+  --sheet:#FFFFFF;
+  --ink:#1F1A24;       /* 자두빛 먹 */
+  --ink-2:#57505E;     /* 보조 7.6:1 */
+  --ink-3:#6B6472;     /* 캡션 5.6:1 */
+  --rule:#E7E3EA;
+  --track:#EFECF1;
+  --plum:#4A2943;      /* 브랜드: 선택·강조 */
+  --rose:#A3354A;  --rose-t:#F9E8EC;   /* 높음 */
+  --sage:#2E6A52;  --sage-t:#E5F0EA;   /* 낮음 */
+  --amber:#7A5512; --amber-t:#FBF2DF;  /* 확인 필요 */
+  --same-t:#EFECF1;
+  --r-photo:18px; --r-card:22px; --r-sm:12px;
+  --ease:cubic-bezier(.2,0,0,1);
+  --sans:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --serif:"Gowun Batang","Nanum Myeongjo",serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.5;font-size:15px;letter-spacing:-.01em;
+  -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;word-break:keep-all;overflow-x:hidden}
+.num{font-variant-numeric:tabular-nums}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--plum);outline-offset:3px;border-radius:10px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+.app{max-width:430px;margin:0 auto;min-height:100dvh;padding:0 16px calc(156px + env(safe-area-inset-bottom));overflow-x:clip}
+@media (min-width:600px){
+  body{padding:32px 0}
+  .app{border-radius:32px;min-height:auto;position:relative;box-shadow:0 0 0 1px rgba(31,26,36,.06),0 24px 60px -24px rgba(31,26,36,.22)}
+}
+
+/* 상단 */
+.top{display:flex;align-items:center;justify-content:space-between;padding:12px 0 4px}
+.logo{display:inline-flex;align-items:center;gap:7px;font-weight:800;font-size:16px;letter-spacing:-.03em}
+.logo i{width:22px;height:22px;border-radius:7px;background:var(--plum);display:grid;place-items:center;color:#fff;font-style:normal;font-size:11px}
+.couple{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 4px 0 12px;border-radius:999px;font-size:14px;color:var(--ink-2);transition:transform 140ms var(--ease)}
+.couple:active{transform:scale(.96)}
+.av{display:flex}
+.av span{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;box-shadow:0 0 0 2px var(--bg)}
+.av span:first-child{background:#F3DCE3;color:#7C2A41}
+.av span:last-child{background:#DCE6EE;color:#2C4A63;margin-left:-8px}
+.meta{display:flex;gap:6px;flex-wrap:wrap;padding:2px 0 18px}
+.pill{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:999px;background:var(--sheet);font-size:13px;color:var(--ink-2);box-shadow:0 0 0 1px var(--rule)}
+.pill b{color:var(--ink);font-weight:700}
+
+/* 결론 한 문장 */
+.verdict h1{font-size:13px;font-weight:600;color:var(--ink-3);margin-bottom:6px}
+.lead{font-size:26px;line-height:1.32;font-weight:700;letter-spacing:-.035em;text-wrap:balance}
+.lead em{font-style:normal;color:var(--rose);white-space:nowrap}
+.lead-sub{margin-top:8px;font-size:13px;color:var(--ink-2);text-wrap:pretty}
+.lead-sub .num{color:var(--ink);font-weight:600}
+
+/* 가장 큰 위험 */
+.risk{margin-top:14px;display:flex;align-items:center;gap:10px;width:100%;min-height:56px;padding:10px 14px;border-radius:var(--r-sm);
+  background:var(--rose-t);color:var(--rose);font-size:14px;font-weight:600;text-align:left;text-decoration:none;transition:transform 140ms var(--ease)}
+.risk span{flex:1;color:var(--ink)}
+.risk span b{color:var(--rose)}
+.risk svg{flex:none}
+.risk:active{transform:scale(.96)}
+
+/* 섹션 머리 */
+.sec{margin-top:30px}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px}
+.sec-h h2{font-size:19px;font-weight:700;letter-spacing:-.03em}
+.sec-h small{font-size:12px;color:var(--ink-3)}
+
+/* === 웨딩홀 사진 카드 (주인공) === */
+.reel{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:16px;
+  margin:0 -16px;padding:4px 16px 16px;scrollbar-width:none;overscroll-behavior-x:contain}
+.reel::-webkit-scrollbar{display:none}
+.hall{position:relative;flex:0 0 74%;max-width:290px;scroll-snap-align:start;border-radius:var(--r-card);background:var(--sheet);
+  box-shadow:0 0 0 1px rgba(31,26,36,.06),0 2px 4px rgba(31,26,36,.04),0 10px 24px -12px rgba(31,26,36,.18);transition:box-shadow 160ms var(--ease)}
+.hall.on{box-shadow:0 0 0 2px var(--plum),0 10px 28px -12px rgba(74,41,67,.45)}
+.hall-btn{display:block;width:100%;padding:6px;text-align:left;border-radius:inherit;transition:transform 140ms var(--ease)}
+.hall-btn:active{transform:scale(.96)}
+.ph{position:relative;aspect-ratio:3/4;border-radius:calc(var(--r-card) - 6px);overflow:hidden;background:#D9D3DC}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph::after{content:"";position:absolute;inset:0;border-radius:inherit;outline:1px solid oklch(0 0 0 / .1);outline-offset:-1px;
+  background:linear-gradient(180deg,rgba(20,14,22,.35) 0%,rgba(20,14,22,0) 26%,rgba(20,14,22,0) 48%,rgba(20,14,22,.82) 100%)}
+.count{position:absolute;z-index:1;top:10px;left:10px;display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 9px;border-radius:999px;
+  background:rgba(20,14,22,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#fff;font-size:12px;font-weight:600}
+/* 비교 체크: 44px 터치 영역, 보이는 원은 28px */
+.pick{position:absolute;z-index:2;top:8px;right:8px;width:44px;height:44px;display:grid;place-items:center;cursor:pointer}
+.pick input{position:absolute;inset:0;opacity:0;cursor:pointer;margin:0}
+.pick span{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;color:transparent;
+  background:rgba(20,14,22,.35);box-shadow:inset 0 0 0 2px #fff;transition:background-color 160ms var(--ease),color 160ms var(--ease),transform 140ms var(--ease)}
+.pick input:checked + span{background:var(--plum);color:#fff;box-shadow:inset 0 0 0 2px #fff,0 2px 6px rgba(20,14,22,.3)}
+.pick input:active + span{transform:scale(.96)}
+.pick input:focus-visible + span{outline:2px solid #fff;outline-offset:2px}
+.pick input:disabled + span{opacity:.45}
+.cap{position:absolute;z-index:1;left:14px;right:14px;bottom:12px;color:#fff}
+.cap strong{display:block;font-family:var(--serif);font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.25}
+.cap span{font-size:12px;opacity:.88}
+.hb{padding:10px 8px 6px}
+.stars{display:flex;gap:12px;font-size:12px;color:var(--ink-2)}
+.stars span{display:inline-flex;align-items:center;gap:3px}
+.stars b{color:var(--ink);font-weight:700}
+.stars svg{color:#C0435C}
+.key{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px;padding-top:8px;border-top:1px solid var(--rule)}
+.key p{font-size:12px;color:var(--ink-3)}
+.key p b{display:block;font-size:16px;color:var(--ink);font-weight:700;letter-spacing:-.02em}
+.chip{display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+.chip.up{background:var(--rose-t);color:var(--rose)}
+.chip.down{background:var(--sage-t);color:var(--sage)}
+.chip.same{background:var(--same-t);color:var(--ink-2)}
+.chip.check{background:var(--amber-t);color:var(--amber)}
+
+.add{flex:0 0 58%;max-width:220px;scroll-snap-align:start;border-radius:var(--r-card);border:1.5px dashed #C9C1CD;background:transparent;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;text-align:center;color:var(--ink-2);font-size:13px;line-height:1.5;
+  transition:transform 140ms var(--ease),background-color 160ms var(--ease)}
+.add:active{transform:scale(.96);background:var(--sheet)}
+.add i{width:44px;height:44px;border-radius:50%;background:var(--sheet);display:grid;place-items:center;color:var(--plum);box-shadow:0 0 0 1px var(--rule)}
+.add b{color:var(--ink);font-size:14px}
+
+/* 카드 (숫자) */
+.card{background:var(--sheet);border-radius:var(--r-card);padding:18px 16px 6px;box-shadow:0 0 0 1px rgba(31,26,36,.05),0 1px 2px rgba(31,26,36,.04)}
+.card + .card{margin-top:12px}
+.card-h{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:2px}
+.card-h h3{font-size:16px;font-weight:700}
+.card-h small{font-size:12px;color:var(--ink-3)}
+.legend{display:flex;gap:16px;font-size:12px;color:var(--ink-3);padding:6px 0 2px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.lg-me{width:10px;height:10px;border-radius:50%;background:var(--ink)}
+.lg-med{width:2px;height:12px;background:var(--ink-3);border-radius:1px}
+
+.row{padding:14px 0;border-top:1px solid var(--rule)}
+.legend + .row{border-top:0}
+.row-h{display:flex;align-items:center;gap:12px}
+.thumb{width:48px;height:48px;flex:none;border-radius:var(--r-sm);overflow:hidden;position:relative}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb::after{content:"";position:absolute;inset:0;border-radius:inherit;outline:1px solid oklch(0 0 0 / .1);outline-offset:-1px}
+.row-t{flex:1;min-width:0}
+.row-t h4{font-size:15px;font-weight:700}
+.row-t p{font-size:12px;color:var(--ink-3)}
+.row-v{text-align:right}
+.row-v b{display:block;font-size:17px;font-weight:700;letter-spacing:-.02em}
+.row-v .d{font-size:13px;font-weight:700}
+.d.up{color:var(--rose)} .d.down{color:var(--sage)} .d.same{color:var(--ink-2)}
+
+/* 눈금: 가운데 = 지역 중간값, 양끝 = ±30% */
+.ruler{position:relative;height:24px;margin:12px 0 0}
+.ruler::before{content:"";position:absolute;left:0;right:0;top:11px;height:2px;border-radius:1px;background:var(--track)}
+.ruler .med{position:absolute;left:50%;top:4px;width:2px;height:16px;margin-left:-1px;border-radius:1px;background:var(--ink-3)}
+.ruler .gap{position:absolute;top:11px;height:2px;border-radius:1px;background:currentColor;opacity:.55}
+.ruler .me{position:absolute;top:5px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:currentColor;box-shadow:0 0 0 3px var(--sheet)}
+.ruler.up{color:var(--rose)} .ruler.down{color:var(--sage)} .ruler.same{color:var(--ink)}
+.ends{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-3);margin-top:2px}
+
+/* 선택된 홀 상세 */
+.detail .kv{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.kv-l h4{font-size:15px;font-weight:700}
+.kv-l p{font-size:12px;color:var(--ink-3)}
+.alert{margin:2px -4px 12px;padding:14px;border-radius:14px;background:var(--rose-t);display:flex;gap:10px;color:var(--rose)}
+.alert svg{flex:none;margin-top:2px}
+.alert p{font-size:14px;line-height:1.5;color:var(--ink);text-wrap:pretty}
+.alert p b{display:block;font-size:15px;color:var(--rose);margin-bottom:2px}
+.alert .big{font-weight:800;color:var(--rose)}
+.alert.ok{background:var(--sage-t);color:var(--sage)}
+.alert.ok p b{color:var(--sage)}
+
+/* 숨은 추가금 */
+.hint{font-size:13px;color:var(--ink-2);margin:2px 0 4px}
+.fee{display:flex;align-items:center;gap:12px;min-height:60px;width:100%;text-align:left;border-top:1px solid var(--rule);transition:background-color 140ms var(--ease)}
+.hint + .fee{border-top:0}
+.fee .t{flex:1;min-width:0}
+.fee .t strong{display:block;font-size:15px;font-weight:600}
+.fee .t span{font-size:13px;color:var(--ink-3)}
+.fee svg{color:#B4ABB8;flex:none}
+.fee:active{background:var(--track)}
+.ceiling{margin:10px -10px 10px;padding:18px;border-radius:14px;background:var(--plum);color:#fff}
+.ceiling p{font-size:13px;color:rgba(255,255,255,.78)}
+.ceiling .big{font-size:28px;font-weight:800;letter-spacing:-.03em;color:#fff;margin-top:2px}
+.ceiling .eq{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.18);font-size:12px;color:rgba(255,255,255,.78)}
+
+.source{margin:20px 4px 0;font-size:12px;line-height:1.6;color:var(--ink-3)}
+
+/* === 홀끼리 비교 === */
+.rank{list-style:none;margin:4px 0 6px}
+.rank li{display:flex;align-items:center;gap:12px;min-height:56px;padding:6px 0;border-top:1px solid var(--rule)}
+.rank li:first-child{border-top:0}
+.rank .no{width:18px;flex:none;font-size:13px;font-weight:700;color:var(--ink-3);text-align:center}
+.rank li:first-child .no{color:var(--sage)}
+.rank .tn{width:44px;height:44px;flex:none;border-radius:10px;overflow:hidden;position:relative}
+.rank .tn img,.cmp-ph img{width:100%;height:100%;object-fit:cover;display:block}
+.rank .tn::after,.cmp-ph::after{content:"";position:absolute;inset:0;border-radius:inherit;outline:1px solid oklch(0 0 0 / .1);outline-offset:-1px}
+.rank .nm{flex:1;min-width:0;font-size:15px;font-weight:600}
+.rank .amt{text-align:right}
+.rank .amt b{display:block;font-size:16px;font-weight:700;letter-spacing:-.02em}
+.rank .amt span{font-size:12px;color:var(--ink-3)}
+.rank li:first-child .amt span{color:var(--sage);font-weight:700}
+
+.tbl-wrap{margin:8px -16px 0;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;overscroll-behavior-x:contain;border-top:1px solid var(--rule)}
+.tbl-wrap::-webkit-scrollbar{display:none}
+.cmp{border-collapse:separate;border-spacing:0;font-size:14px}
+.cmp th,.cmp td{padding:12px 10px;border-bottom:1px solid var(--rule);vertical-align:top;text-align:left}
+.cmp tr:last-child th,.cmp tr:last-child td{border-bottom:0}
+.cmp th[scope="row"]{position:sticky;left:0;z-index:1;width:84px;min-width:84px;padding-left:16px;background:var(--sheet);
+  font-size:12px;font-weight:600;color:var(--ink-2);box-shadow:6px 0 8px -6px rgba(31,26,36,.18)}
+.cmp thead th{padding-top:14px}
+.cmp td{min-width:112px;scroll-snap-align:start;scroll-margin-left:84px}
+.cmp td:last-child{padding-right:16px}
+.cmp-ph{position:relative;width:100%;aspect-ratio:1;border-radius:12px;overflow:hidden;margin-bottom:6px}
+.cmp-name{font-family:var(--serif);font-size:15px;font-weight:700;line-height:1.3}
+.cmp .v{font-weight:700;letter-spacing:-.02em;white-space:nowrap}
+.cmp .s{display:block;font-size:12px;color:var(--ink-3);font-weight:500;white-space:nowrap}
+.cmp td.best{background:var(--sage-t)}
+.cmp td.best .s{color:var(--sage);font-weight:700}
+.cmp .up{color:var(--rose)} .cmp .down{color:var(--sage)}
+.cmp-note{font-size:12px;color:var(--ink-3);padding:10px 0 12px;text-wrap:pretty}
+
+/* 떠오르는 비교 버튼 */
+.cta{position:fixed;left:0;right:0;bottom:calc(66px + env(safe-area-inset-bottom));z-index:9;display:flex;justify-content:center;padding:0 16px;pointer-events:none;
+  transition:opacity 200ms var(--ease),translate 200ms var(--ease)}
+.cta[hidden],.cta.away{display:flex;opacity:0;translate:0 12px}
+.cta a{pointer-events:auto;display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;background:var(--plum);color:#fff;
+  font-size:15px;font-weight:700;text-decoration:none;box-shadow:0 8px 24px -8px rgba(74,41,67,.6),0 0 0 1px rgba(255,255,255,.15) inset;transition:transform 140ms var(--ease)}
+.cta[hidden] a,.cta.away a{pointer-events:none}
+.cta a:active{transform:scale(.96)}
+@media (min-width:600px){.cta{position:sticky;bottom:72px;margin-top:16px}}
+
+/* 하단 탭 */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:10;background:rgba(255,255,255,.94);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);
+  box-shadow:0 -1px 0 var(--rule);padding-bottom:env(safe-area-inset-bottom)}
+.tabs ul{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);max-width:430px;margin:0 auto}
+.tabs a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:58px;font-size:11px;font-weight:600;color:var(--ink-3);text-decoration:none;transition:transform 140ms var(--ease)}
+.tabs a[aria-current="page"]{color:var(--plum)}
+.tabs a:active{transform:scale(.96)}
+.tabs svg{width:22px;height:22px}
+@media (min-width:600px){.tabs{position:sticky;margin:24px -16px calc(-156px - env(safe-area-inset-bottom));border-radius:0 0 32px 32px}}
+</style>
+</head>
+<body>
+<div class="app">
+
+<header>
+  <div class="top">
+    <span class="logo" aria-label="가칭 로고"><i aria-hidden="true">♥</i>가칭</span>
+    <button class="couple" type="button" aria-label="커플: 민지, 준호">민지 · 준호<span class="av" aria-hidden="true"><span>민</span><span>준</span></span></button>
+  </div>
+  <div class="meta">
+    <span class="pill">예식 <b class="num">D-127</b> <span class="num">2027.04.10</span></span>
+    <span class="pill">지역 <b>서울 강남</b></span>
+  </div>
+</header>
+
+<main>
+  <!-- 1. 결론 한 문장 -->
+  <section class="verdict" aria-labelledby="v-h">
+    <h1 id="v-h">내 견적 비교, 스드메 합계 기준</h1>
+    <p class="lead">내 견적이 평균보다 <em class="num">약 54만 원</em> 높아요</p>
+    <p class="lead-sub">내 합계 <span class="num">4,850,000원</span>, 서울 강남 중간값 <span class="num">4,310,000원</span></p>
+    <!-- 2. 가장 큰 위험 -->
+    <a class="risk" href="#hall-detail">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+      <span>라온홀 보증 인원 때문에 <b class="num">4,750,000원</b>을 더 낼 수 있어요</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </a>
+  </section>
+
+  <!-- 3. 웨딩홀: 사진으로 고르고 숫자로 확인 -->
+  <section class="sec" aria-labelledby="hall-h">
+    <div class="sec-h"><h2 id="hall-h">투어한 웨딩홀</h2><small>하객 <span class="num">200</span>명 예상</small></div>
+    <div class="reel" id="reel" role="group" aria-label="웨딩홀 사진 카드, 옆으로 넘겨 보기">
+      <button class="add" type="button">
+        <i aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i>
+        <b>투어 사진 올리기</b>
+        <span>찍은 사진을 올리면 둘이 같이 비교할 수 있어요</span>
+      </button>
+    </div>
+
+    <!-- 선택된 홀 상세 (카드를 누르면 바뀜) -->
+    <div class="card detail" id="hall-detail" style="scroll-margin-top:16px" aria-live="polite">
+      <div class="card-h"><h3 id="dt-name">라온홀 견적</h3><small>서울 강남 중간값 대비</small></div>
+      <div class="legend" aria-hidden="true"><span><i class="lg-me"></i>이 홀</span><span><i class="lg-med"></i>중간값</span></div>
+      <div id="dt-rows"></div>
+    </div>
+  </section>
+
+  <!-- 3-1. 홀끼리 비교 (사진 카드에서 체크한 곳, 최대 5곳) -->
+  <section class="sec" id="compare" aria-labelledby="cmp-h" style="scroll-margin-top:16px">
+    <div class="sec-h"><h2 id="cmp-h">홀끼리 비교</h2><small id="cmp-n" class="num"></small></div>
+    <div class="card">
+      <div class="card-h"><h3>하객 200명 기준 총비용 낮은 순</h3></div>
+      <ol class="rank" id="rank"></ol>
+      <div class="tbl-wrap" role="region" aria-label="홀별 비교표, 옆으로 넘겨 보기" tabindex="0">
+        <table class="cmp" id="cmp"></table>
+      </div>
+      <p class="cmp-note">총비용은 식대 × max(보증 인원, 하객 200명) + 대관료. 지역 평균 대비는 서울 강남 중간값(식대 88,000원, 대관료 7,500,000원)으로 계산한 총비용 25,100,000원과 비교했어요.</p>
+    </div>
+  </section>
+
+  <!-- 4. 스드메 항목별 비교 -->
+  <section class="sec" aria-labelledby="sdm-h">
+    <div class="sec-h"><h2 id="sdm-h">스드메 비교</h2><small>내 견적 vs 서울 강남 중간값</small></div>
+    <div class="card">
+      <div class="legend" aria-hidden="true"><span><i class="lg-me"></i>내 견적</span><span><i class="lg-med"></i>중간값</span></div>
+      <article class="row">
+        <div class="row-h">
+          <span class="thumb"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=160&h=160&q=80&auto=format&fit=crop" alt="스튜디오 촬영 사진 예시" width="48" height="48"></span>
+          <div class="row-t"><h4>스튜디오</h4><p class="num">중간값 1,530,000원</p></div>
+          <div class="row-v"><b class="num">1,800,000원</b><span class="d up num">+27만 원 (+18%)</span></div>
+        </div>
+        <div class="ruler up" role="img" aria-label="중간값보다 18% 높음"><span class="med"></span><span class="gap" style="left:50%;width:30%"></span><span class="me" style="left:80%"></span></div>
+      </article>
+      <article class="row">
+        <div class="row-h">
+          <span class="thumb"><img src="https://images.unsplash.com/photo-1761116065261-586acfd09b7f?w=160&h=160&q=80&auto=format&fit=crop&crop=top" alt="드레스 예시" width="48" height="48"></span>
+          <div class="row-t"><h4>드레스</h4><p class="num">중간값 1,780,000원</p></div>
+          <div class="row-v"><b class="num">2,100,000원</b><span class="d up num">+32만 원 (+18%)</span></div>
+        </div>
+        <div class="ruler up" role="img" aria-label="중간값보다 18% 높음"><span class="med"></span><span class="gap" style="left:50%;width:30%"></span><span class="me" style="left:80%"></span></div>
+      </article>
+      <article class="row">
+        <div class="row-h">
+          <span class="thumb"><img src="https://images.unsplash.com/photo-1773688189414-7637b9b138e1?w=160&h=160&q=80&auto=format&fit=crop&crop=faces" alt="메이크업 예시" width="48" height="48"></span>
+          <div class="row-t"><h4>메이크업</h4><p class="num">중간값 1,000,000원</p></div>
+          <div class="row-v"><b class="num">950,000원</b><span class="d same num">−5만 원, 비슷함</span></div>
+        </div>
+        <div class="ruler same" role="img" aria-label="중간값보다 5% 낮음, 비슷함"><span class="med"></span><span class="gap" style="left:41.7%;width:8.3%"></span><span class="me" style="left:41.7%"></span></div>
+        <div class="ends num" aria-hidden="true"><span>−30%</span><span>중간값</span><span>+30%</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 5. 숨은 추가금 -->
+  <section class="sec" aria-labelledby="add-h">
+    <div class="sec-h"><h2 id="add-h">숨은 추가금</h2><span class="chip check">3개 확인 필요</span></div>
+    <div class="card">
+      <p class="hint">견적에 포함됐는지 아직 확인하지 않은 항목이에요.</p>
+      <button class="fee" type="button"><span class="t"><strong>스튜디오 원본 데이터</strong><span class="num">보통 약 22만 원</span></span><span class="chip check">확인 필요</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+      <button class="fee" type="button"><span class="t"><strong>드레스 헬퍼비</strong><span class="num">보통 약 25만 원</span></span><span class="chip check">확인 필요</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+      <button class="fee" type="button"><span class="t"><strong>메이크업 얼리스타트</strong><span class="num">보통 약 10만 원</span></span><span class="chip check">확인 필요</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+      <div class="ceiling">
+        <p>추가금까지 넣으면 최대</p>
+        <p class="big num">5,420,000원</p>
+        <p class="eq num">스드메 견적 4,850,000원 + 추가금 570,000원</p>
+      </div>
+    </div>
+  </section>
+
+  <p class="source">한국소비자원 참가격 2026년 9월 조사, 지역 중간값 기준. 참고용입니다. 사진은 시안용 예시(Unsplash)입니다.</p>
+</main>
+
+<div class="cta" id="cta"><a href="#compare"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16M9 4v16"/></svg><span><span class="num" id="cta-n">5</span>곳 비교하기</span></a></div>
+
+<nav class="tabs" aria-label="주 메뉴">
+  <ul>
+    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20H4z"/><path d="M10 20v-5h4v5"/></svg>홈</a></li>
+    <li><a href="#" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 20V10M12 20V4M19 20v-7"/></svg>견적</a></li>
+    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2.5"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>일정</a></li>
+    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18M16 14.5h2"/></svg>비용</a></li>
+    <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg>청첩장</a></li>
+  </ul>
+</nav>
+</div>
+
+<script>
+// 서울 강남 중간값: 식대 88,000원, 대관료 7,500,000원. 눈금 양끝 = ±30%.
+const MEAL = 88000, RENT = 7500000, GUESTS = 200, MAX_PICK = 5;
+const MED_TOTAL = MEAL * GUESTS + RENT; // 25,100,000원
+const U = (id, w = 800, h) => `https://images.unsplash.com/${id}?w=${w}${h ? '&h=' + h : ''}&q=80&auto=format&fit=crop`;
+const HALLS = [
+  {name:'라온홀',       img:'photo-1761110787206-2cc164e4913c', alt:'샹들리에 아래 원형 테이블이 놓인 연회장',          date:'11월 8일',  photos:12, mj:4, jh:5, meal:95000, rent:7000000, min:250},
+  {name:'채플 드 메이', img:'photo-1670529776180-60e4132ab90c', alt:'흰 꽃 아치와 금색 의자가 놓인 예식 통로',          date:'11월 15일', photos:8,  mj:5, jh:3, meal:88000, rent:8500000, min:200},
+  {name:'가든 루체',    img:'photo-1607861884586-c7cfaed16290', alt:'흰 의자가 줄지어 있고 조명이 켜진 야외 정원 예식장', date:'11월 22일', photos:15, mj:4, jh:4, meal:79000, rent:5500000, min:220},
+  {name:'더 리안',      img:'photo-1763429338698-439aa108e7fb', alt:'연회 테이블이 차려진 실내 홀',                    date:'11월 23일', photos:10, mj:3, jh:4, meal:99000, rent:9000000, min:200},
+  {name:'포레 웨딩',    img:'photo-1523438885200-e635ba2c371e', alt:'초록 나무에 둘러싸인 야외 정자',                  date:'11월 29일', photos:9,  mj:5, jh:4, meal:85000, rent:6000000, min:180},
+];
+HALLS.forEach((h, i) => { h.i = i; h.total = h.meal * Math.max(h.min, GUESTS) + h.rent; h.avg = (h.mj + h.jh) / 2; });
+const won = n => n.toLocaleString('ko-KR') + '원';
+const man = n => (n / 10000).toLocaleString('ko-KR') + '만 원';
+const pct = (v, med) => Math.round((v - med) / med * 100);
+const sign = p => (p > 0 ? '+' : p < 0 ? '−' : '') + Math.abs(p) + '%';
+const STAR = '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.8l-5.2 2.8 1-5.8-4.3-4.1 5.9-.8z"/></svg>';
+const CHECK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>';
+const picked = new Set(HALLS.map(h => h.i)); // 시안: 5곳 모두 선택된 상태
+let current = 0;
+
+function cmp(v, med){
+  const p = pct(v, med);
+  const cls = Math.abs(p) <= 5 ? 'same' : p > 0 ? 'up' : 'down';
+  const pos = Math.max(0, Math.min(100, 50 + (v - med) / med / .3 * 50));
+  return {cls, pos, label: cls === 'same' ? '비슷함' : sign(p)};
+}
+
+// 사진 카드
+document.getElementById('reel').insertAdjacentHTML('afterbegin', HALLS.map(h => {
+  const c = cmp(h.meal, MEAL);
+  const chip = c.cls === 'same' ? '비슷함' : c.label + (c.cls === 'up' ? ' 높음' : ' 낮음');
+  return `<article class="hall" data-i="${h.i}">
+    <button class="hall-btn" type="button" aria-pressed="false" aria-label="${h.name} 상세 보기">
+      <div class="ph"><img src="${U(h.img)}" alt="${h.alt}" width="800" height="1067"${h.i > 1 ? ' loading="lazy"' : ''}>
+        <span class="count num">사진 ${h.photos}장</span>
+        <div class="cap"><strong>${h.name}</strong><span class="num">${h.date} 투어</span></div></div>
+      <div class="hb">
+        <div class="stars"><span>민지 ${STAR}<b class="num">${h.mj}</b></span><span>준호 ${STAR}<b class="num">${h.jh}</b></span></div>
+        <div class="key"><p>1인당 식대<b class="num">${won(h.meal)}</b></p><span class="chip ${c.cls} num">${chip}</span></div>
+      </div>
+    </button>
+    <label class="pick"><input type="checkbox" checked aria-label="${h.name} 비교에 넣기"><span aria-hidden="true">${CHECK}</span></label>
+  </article>`;
+}).join(''));
+
+// 선택한 홀 상세 (지역 중간값 대비)
+function row(title, value, med, medText){
+  const c = cmp(value, med), l = Math.min(c.pos, 50), w = Math.abs(c.pos - 50);
+  return `<article class="row"><div class="kv"><div class="kv-l"><h4>${title}</h4><p class="num">${medText}</p></div>
+    <div class="row-v"><b class="num">${won(value)}</b><span class="d ${c.cls} num">${c.label}</span></div></div>
+    <div class="ruler ${c.cls}" role="img" aria-label="중간값 대비 ${c.label}"><span class="med"></span><span class="gap" style="left:${l}%;width:${w}%"></span><span class="me" style="left:${c.pos}%"></span></div></article>`;
+}
+function renderDetail(){
+  const h = HALLS[current], short = h.min - GUESTS, extra = short * h.meal;
+  document.querySelectorAll('.hall').forEach(el => {
+    const on = +el.dataset.i === current;
+    el.classList.toggle('on', on);
+    el.querySelector('.hall-btn').setAttribute('aria-pressed', on);
+  });
+  document.getElementById('dt-name').textContent = h.name + ' 견적';
+  document.getElementById('dt-rows').innerHTML =
+    row('1인당 식대', h.meal, MEAL, '중간값 ' + won(MEAL)) +
+    row('대관료', h.rent, RENT, '중간값 ' + won(RENT)) +
+    `<article class="row"><div class="kv"><div class="kv-l"><h4>보증 인원</h4><p class="num">예상 하객 ${GUESTS}명</p></div>
+      <div class="row-v"><b class="num">${h.min}명</b><span class="d ${short > 0 ? 'up' : 'down'} num">${short > 0 ? short + '명 부족' : '여유 있음'}</span></div></div></article>` +
+    (short > 0
+      ? `<div class="alert" role="note"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+         <p><b>보증 인원보다 하객이 ${short}명 적어요</b>오지 않은 ${short}명분 식대 <span class="big num">${won(extra)}</span>을 더 내게 돼요.</p></div>`
+      : `<div class="alert ok" role="note"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>
+         <p><b>보증 인원 걱정은 없어요</b>예상 하객 ${GUESTS}명이 보증 인원 ${h.min}명 이상이라 빈자리 식대를 따로 내지 않아요.</p></div>`);
+}
+
+// 홀끼리 비교: 총비용 낮은 순으로 열을 놓고, 행마다 가장 유리한 값에 표시
+function renderCompare(){
+  const list = HALLS.filter(h => picked.has(h.i)).sort((a, b) => a.total - b.total);
+  const n = list.length;
+  document.getElementById('cta-n').textContent = n;
+  document.getElementById('cta').hidden = n < 2;
+  document.getElementById('compare').hidden = n < 2;
+  document.getElementById('cmp-n').textContent = `${n}곳 선택, 최대 ${MAX_PICK}곳`;
+  document.querySelectorAll('.pick input').forEach(x => { x.disabled = !x.checked && n >= MAX_PICK; });
+  if (n < 2) return;
+  const first = list[0];
+  document.getElementById('rank').innerHTML = list.map((h, k) => `<li>
+    <span class="no num">${k + 1}</span>
+    <span class="tn"><img src="${U(h.img, 120, 120)}" alt="" width="44" height="44"></span>
+    <span class="nm">${h.name}</span>
+    <span class="amt"><b class="num">${won(h.total)}</b><span class="num">${k ? '1위보다 +' + man(h.total - first.total) : '가장 저렴'}</span></span></li>`).join('');
+
+  const best = (key, dir, tag) => { const v = list.map(h => h[key]); const b = dir < 0 ? Math.min(...v) : Math.max(...v); return h => h[key] === b ? tag : ''; };
+  const rows = [
+    ['1인당 식대', best('meal', -1, '가장 저렴'), h => [won(h.meal), '중간값 대비 ' + cmp(h.meal, MEAL).label]],
+    ['대관료',     best('rent', -1, '가장 저렴'), h => [won(h.rent), '중간값 대비 ' + cmp(h.rent, RENT).label]],
+    ['보증 인원',  best('min', -1, '부담 가장 적음'), h => [h.min + '명', h.min > GUESTS ? `${h.min - GUESTS}명분 더 냄` : '추가 부담 없음']],
+    ['총비용<br>하객 200명', best('total', -1, '가장 저렴'), h => [won(h.total), '1위보다 +' + man(h.total - first.total)]],
+    ['지역 평균 대비', best('total', -1, '가장 낮음'), h => { const p = pct(h.total, MED_TOTAL); return [`<span class="${Math.abs(p) < 3 ? '' : p > 0 ? 'up' : 'down'}">${sign(p)}</span>`, p > 0 ? '평균보다 높음' : '평균보다 낮음']; }],
+    ['둘의 평가', best('avg', 1, '둘 다 좋아함'), h => [`★${h.avg.toFixed(1)}`, `민지 ${h.mj}, 준호 ${h.jh}`]],
+  ];
+  document.getElementById('cmp').innerHTML =
+    `<thead><tr><th scope="row">홀</th>${list.map(h => `<td><div class="cmp-ph"><img src="${U(h.img, 240, 240)}" alt="${h.alt}" width="112" height="112"></div><div class="cmp-name">${h.name}</div></td>`).join('')}</tr></thead>
+     <tbody>${rows.map(([label, isBest, cell]) => `<tr><th scope="row">${label}</th>${list.map(h => {
+       const [v, sub] = cell(h), tag = isBest(h);
+       return `<td class="${tag ? 'best' : ''}"><span class="v num">${v}</span><span class="s num">${tag || sub}</span></td>`;
+     }).join('')}</tr>`).join('')}</tbody>`;
+}
+
+document.querySelectorAll('.hall').forEach(el => {
+  const i = +el.dataset.i;
+  el.querySelector('.hall-btn').addEventListener('click', () => { current = i; renderDetail(); });
+  el.querySelector('.pick input').addEventListener('change', e => { e.target.checked ? picked.add(i) : picked.delete(i); renderCompare(); });
+});
+renderDetail();
+renderCompare();
+// 비교 화면이 보이면 떠 있는 버튼은 숨긴다
+new IntersectionObserver(([e]) => document.getElementById('cta').classList.toggle('away', e.isIntersecting)).observe(document.getElementById('compare'));
+</script>
+</body>
+</html>

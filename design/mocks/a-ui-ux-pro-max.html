@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>내 견적 비교 · 시안 A (ui-ux-pro-max)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+/* Design system: Soft UI Evolution (ui-ux-pro-max) — wedding rose+gold palette, toned down with banking-navy trust rules */
+:root{
+  --bg:#FBF8F5;          /* warm ivory */
+  --card:#FFFFFF;
+  --fg:#2A1F24;          /* 15.6:1 on card */
+  --muted-fg:#6B5E63;    /* 6.1:1 on card */
+  --border:#EDE4DF;
+  --muted:#F5EFEB;
+  --primary:#9D2B55;     /* deep rose, 7.4:1 on card */
+  --primary-soft:#F8E8EE;
+  --accent:#A16207;      /* gold, 5.3:1 on card */
+  --accent-soft:#FBF3E2;
+  --over:#B42318;        /* 높음 6.6:1 */
+  --over-soft:#FDECEA;
+  --ok:#0F766E;          /* 비슷/낮음 5.5:1 */
+  --ok-soft:#E6F4F2;
+  --bar-median:#CFC4C9;
+  --shadow:0 1px 2px rgba(42,31,36,.04),0 4px 16px rgba(42,31,36,.06);
+  --r:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:#EFE9E5}
+body{font-family:"Pretendard Variable",Pretendard,-apple-system,"Noto Sans KR",sans-serif;color:var(--fg);
+  font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;word-break:keep-all}
+.num{font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.app{max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg);position:relative;padding-bottom:96px}
+@media(min-width:600px){.app{margin:24px auto;min-height:auto;border-radius:28px;box-shadow:0 12px 48px rgba(42,31,36,.12);overflow:hidden}}
+
+/* header */
+header{padding:16px 20px 8px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:17px}
+.logo i{width:28px;height:28px;border-radius:9px;background:var(--primary);display:grid;place-items:center}
+.logo small{font-size:11px;font-weight:600;color:var(--muted-fg);border:1px dashed var(--border);border-radius:6px;padding:1px 6px}
+.icon-btn{width:44px;height:44px;border:0;background:transparent;border-radius:12px;display:grid;place-items:center;color:var(--fg);cursor:pointer}
+.icon-btn:hover{background:var(--muted)}
+.couple{margin:4px 20px 0;padding:14px 16px;background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);display:flex;align-items:center;gap:12px}
+.avatars{display:flex}
+.avatars span{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:700;border:2px solid #fff}
+.avatars span:first-child{background:var(--primary-soft);color:var(--primary)}
+.avatars span:last-child{background:var(--accent-soft);color:var(--accent);margin-left:-8px}
+.couple .who{flex:1;min-width:0}
+.couple .who b{font-size:15px}
+.couple .who p{font-size:13px;color:var(--muted-fg)}
+.dday{text-align:right}
+.dday b{display:block;font-size:20px;font-weight:800;color:var(--primary);line-height:1.2}
+.dday span{font-size:12px;color:var(--muted-fg)}
+
+main{padding:0 20px}
+h1{font-size:22px;font-weight:700;margin:24px 0 12px;letter-spacing:-.02em}
+h2{font-size:17px;font-weight:700;letter-spacing:-.01em}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;margin:28px 0 12px}
+.sec-head span{font-size:13px;color:var(--muted-fg)}
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:20px}
+
+/* summary */
+.summary{background:linear-gradient(160deg,#fff 0%,#FDF6F8 100%);border:1px solid var(--primary-soft)}
+.summary .eyebrow{font-size:13px;font-weight:600;color:var(--muted-fg);display:flex;align-items:center;gap:6px}
+.summary p.lead{font-size:20px;font-weight:600;line-height:1.45;margin:8px 0 16px;letter-spacing:-.02em}
+.summary p.lead strong{color:var(--over);font-weight:800}
+.totals{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.totals div{background:var(--muted);border-radius:12px;padding:10px 12px}
+.totals dt{font-size:12px;color:var(--muted-fg)}
+.totals dd{font-size:17px;font-weight:700}
+
+/* compare rows */
+.row{padding:16px 0;border-top:1px solid var(--border)}
+.row:first-child{border-top:0;padding-top:0}
+.row:last-child{padding-bottom:0}
+.row-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+.row-top b{font-size:16px}
+.chip{font-size:12px;font-weight:700;border-radius:999px;padding:3px 10px;white-space:nowrap;display:inline-flex;align-items:center;gap:4px}
+.chip.over{background:var(--over-soft);color:var(--over)}
+.chip.ok{background:var(--ok-soft);color:var(--ok)}
+.chip.check{background:var(--accent-soft);color:var(--accent)}
+.bar{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:8px;font-size:13px;margin-top:6px}
+.bar label{color:var(--muted-fg)}
+.track{height:8px;background:var(--muted);border-radius:4px;overflow:hidden}
+.track i{display:block;height:100%;border-radius:4px}
+.track i.mine{background:var(--primary)}
+.track i.median{background:var(--bar-median)}
+.bar .num{font-weight:600;min-width:86px;text-align:right}
+.diff{margin-top:8px;font-size:14px;font-weight:600}
+.diff.over{color:var(--over)}
+.diff.ok{color:var(--ok)}
+.legend{display:flex;gap:14px;font-size:12px;color:var(--muted-fg);margin-bottom:14px}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.legend .l1::before{background:var(--primary)}
+.legend .l2::before{background:var(--bar-median)}
+
+/* hidden fees */
+.fee{display:flex;align-items:center;gap:12px;min-height:56px;padding:10px 0;border-top:1px solid var(--border)}
+.fee:first-of-type{border-top:0}
+.fee .ic{width:36px;height:36px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;flex:none}
+.fee .t{flex:1;min-width:0}
+.fee .t b{font-size:15px;font-weight:600;display:block}
+.fee .t span{font-size:13px;color:var(--muted-fg)}
+.fee button{min-height:44px;padding:0 14px;border-radius:12px;border:1px solid var(--accent);background:#fff;color:var(--accent);font:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:background .2s}
+.fee button:hover{background:var(--accent-soft)}
+.max{margin-top:14px;background:var(--accent-soft);border-radius:12px;padding:14px 16px;font-size:14px}
+.max strong{display:block;font-size:22px;font-weight:800;color:var(--fg);margin-top:2px}
+.max small{display:block;font-size:12px;color:var(--muted-fg);margin-top:4px}
+
+/* hall */
+.kv{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 0;border-top:1px solid var(--border)}
+.kv:first-child{border-top:0;padding-top:0}
+.kv .k{font-size:15px;font-weight:600}
+.kv .k small{display:block;font-size:13px;font-weight:400;color:var(--muted-fg)}
+.kv .v{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.kv .v b{font-size:16px}
+.warn{margin-top:14px;border-radius:12px;background:var(--over-soft);border:1px solid #F6C9C4;padding:14px 16px;display:flex;gap:12px}
+.warn svg{flex:none;color:var(--over);margin-top:2px}
+.warn p{font-size:14px;line-height:1.55}
+.warn strong{color:var(--over);font-weight:800}
+.warn .cta{display:inline-flex;align-items:center;min-height:44px;margin-top:6px;font-weight:700;color:var(--over);text-decoration:underline;text-underline-offset:3px}
+
+.source{margin:24px 0 8px;font-size:12px;color:var(--muted-fg);display:flex;gap:6px;line-height:1.5}
+.source svg{flex:none;margin-top:2px}
+
+/* tab bar */
+nav.tabs{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px);border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(5,1fr);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+@media(min-width:600px){nav.tabs{position:sticky;transform:none;left:auto}}
+nav.tabs a{min-height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;font-weight:600;color:var(--muted-fg);text-decoration:none;border-radius:12px}
+nav.tabs a[aria-current]{color:var(--primary)}
+nav.tabs a[aria-current] svg{stroke-width:2.2}
+a:focus-visible,button:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="logo">
+      <i aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><circle cx="9" cy="12" r="5"/><circle cx="15" cy="12" r="5"/></svg></i>
+      가칭 <small>LOGO</small>
+    </div>
+    <button class="icon-btn" aria-label="알림">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+    </button>
+  </header>
+
+  <section class="couple" aria-label="커플 정보">
+    <div class="avatars" aria-hidden="true"><span>민</span><span>준</span></div>
+    <div class="who">
+      <b>민지 · 준호</b>
+      <p>서울 강남 · 2027.04.10 (토)</p>
+    </div>
+    <div class="dday"><b class="num">D-127</b><span>예식까지</span></div>
+  </section>
+
+  <main>
+    <h1>내 견적 비교</h1>
+
+    <section class="card summary" aria-labelledby="sum-h">
+      <div class="eyebrow" id="sum-h">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg>
+        스드메 합계 기준
+      </div>
+      <p class="lead">내 견적이 서울 강남 평균보다<br><strong class="num">약 54만 원</strong> 높아요</p>
+      <dl class="totals">
+        <div><dt>내 견적</dt><dd class="num">4,850,000원</dd></div>
+        <div><dt>지역 중간값</dt><dd class="num">4,310,000원</dd></div>
+      </dl>
+    </section>
+
+    <div class="sec-head"><h2>스드메 비교</h2><span>내 견적 vs 서울 강남 중간값</span></div>
+    <section class="card" aria-label="스드메 항목별 비교">
+      <div class="legend" aria-hidden="true"><span class="l1">내 견적</span><span class="l2">지역 중간값</span></div>
+
+      <div class="row">
+        <div class="row-top"><b>스튜디오</b><span class="chip over">높음 +18%</span></div>
+        <div class="bar"><label>내 견적</label><div class="track"><i class="mine" style="width:85.7%"></i></div><span class="num">1,800,000원</span></div>
+        <div class="bar"><label>중간값</label><div class="track"><i class="median" style="width:72.9%"></i></div><span class="num">1,530,000원</span></div>
+        <p class="diff over num">+27만 원 더 비싸요</p>
+      </div>
+
+      <div class="row">
+        <div class="row-top"><b>드레스</b><span class="chip over">높음 +18%</span></div>
+        <div class="bar"><label>내 견적</label><div class="track"><i class="mine" style="width:100%"></i></div><span class="num">2,100,000원</span></div>
+        <div class="bar"><label>중간값</label><div class="track"><i class="median" style="width:84.8%"></i></div><span class="num">1,780,000원</span></div>
+        <p class="diff over num">+32만 원 더 비싸요</p>
+      </div>
+
+      <div class="row">
+        <div class="row-top"><b>메이크업</b><span class="chip ok">비슷함</span></div>
+        <div class="bar"><label>내 견적</label><div class="track"><i class="mine" style="width:45.2%"></i></div><span class="num">950,000원</span></div>
+        <div class="bar"><label>중간값</label><div class="track"><i class="median" style="width:47.6%"></i></div><span class="num">1,000,000원</span></div>
+        <p class="diff ok num">-5만 원, 평균 수준이에요</p>
+      </div>
+    </section>
+
+    <div class="sec-head"><h2>숨은 추가금</h2><span>포함 여부 미확인 3건</span></div>
+    <section class="card" aria-label="숨은 추가금">
+      <div class="fee">
+        <span class="ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3"/></svg></span>
+        <div class="t"><b>스튜디오 원본 데이터</b><span class="num">보통 약 22만 원</span></div>
+        <button type="button">확인 필요</button>
+      </div>
+      <div class="fee">
+        <span class="ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a6.5 6.5 0 0 1 13 0"/></svg></span>
+        <div class="t"><b>드레스 헬퍼비</b><span class="num">보통 약 25만 원</span></div>
+        <button type="button">확인 필요</button>
+      </div>
+      <div class="fee">
+        <span class="ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <div class="t"><b>메이크업 얼리스타트</b><span class="num">보통 약 10만 원</span></div>
+        <button type="button">확인 필요</button>
+      </div>
+      <div class="max">
+        추가금까지 넣으면 최대
+        <strong class="num">5,420,000원</strong>
+        <small class="num">스드메 견적 4,850,000원 + 추가금 570,000원</small>
+      </div>
+    </section>
+
+    <div class="sec-head"><h2>웨딩홀</h2><span>하객 200명 예상</span></div>
+    <section class="card" aria-label="웨딩홀 비교">
+      <div class="kv">
+        <div class="k">1인당 식대<small class="num">중간값 88,000원</small></div>
+        <div class="v"><b class="num">95,000원</b><span class="chip over">+8%</span></div>
+      </div>
+      <div class="kv">
+        <div class="k">대관료<small class="num">중간값 7,500,000원</small></div>
+        <div class="v"><b class="num">7,000,000원</b><span class="chip ok">-7%</span></div>
+      </div>
+      <div class="kv">
+        <div class="k">보증 인원<small>예상 하객 200명</small></div>
+        <div class="v"><b class="num">250명</b></div>
+      </div>
+      <div class="warn" role="note">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.7 18-8-14a2 2 0 0 0-3.4 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+        <div>
+          <p>보증 인원보다 하객이 50명 적어서<br><strong class="num">4,750,000원</strong>을 더 내게 돼요.</p>
+          <a class="cta" href="#">보증 인원 조정 문의하기</a>
+        </div>
+      </div>
+    </section>
+
+    <p class="source">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      한국소비자원 참가격 2026년 9월 조사, 지역 중간값 기준. 참고용입니다.
+    </p>
+  </main>
+
+  <nav class="tabs" aria-label="주요 메뉴">
+    <a href="#"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>홈</a>
+    <a href="#" aria-current="page"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="14" y="7" width="3" height="11"/></svg>견적</a>
+    <a href="#"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>일정</a>
+    <a href="#"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M16 15h2"/></svg>비용</a>
+    <a href="#"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>청첩장</a>
+  </nav>
+</div>
+</body>
+</html>
